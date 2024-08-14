@@ -3,43 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrElliot</title>
+    <title>Unreal Engine Advanced Blogs</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>DrElliot</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Posts</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <button id="theme-toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
-        </div>
+        <h1>Unreal Engine Advanced Blogs</h1>
     </header>
 
-    <main class="container">
-        <article class="post">
-            <h2>Welcome to My Unreal Engine Blog</h2>
-            <p>A dumping ground for useful bits of information I've learned using Unreal.</p>
-        </article>
-        <article class="post">
-            <h2>Getting Started with Unreal Engine</h2>
-            <p>Unreal Engine is a powerful game development tool. In this post, we'll cover how to get started with it.</p>
-        </article>
-        <!-- Add more posts as needed -->
+    <nav>
+        <ul id="blog-categories">
+            <!-- Example category with subgroups -->
+            <li>
+                <h2>Rendering Techniques</h2>
+                <ul class="sub-group">
+                    <li><a href="#">Advanced Shading Models</a></li>
+                    <li><a href="#">Optimizing Post-Processing</a></li>
+                </ul>
+            </li>
+            <li>
+                <h2>Gameplay Systems</h2>
+                <ul class="sub-group">
+                    <li><a href="#">Custom Abilities with GAS</a></li>
+                    <li><a href="#">Advanced AI Techniques</a></li>
+                </ul>
+            </li>
+            <!-- Add more categories here -->
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Blog content will be dynamically loaded here -->
+        <section id="blog-content">
+            <article>
+                <h2>Welcome to My Unreal Engine Blog</h2>
+                <p>This is a collection of advanced blogs focused on Unreal Engine. Each article delves deep into complex topics, offering insights and solutions for experienced developers.</p>
+            </article>
+        </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; <3</p>
-        </div>
+        <p>© 2024 Unreal Engine Advanced Blogs. All rights reserved.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
