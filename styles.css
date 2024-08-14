@@ -14,26 +14,31 @@ body {
     padding: 20px;
 }
 
-/* Header styling */
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-header h1 {
-    font-size: 2.5em;
-    color: #bb86fc;
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Navigation styling */
 nav {
-    margin-bottom: 40px;
+    width: 250px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #bb86fc;
+    overflow-y: auto;
 }
 
 nav h2 {
     font-size: 1.8em;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #03dac5;
+    text-align: center;
 }
 
 #blog-categories {
@@ -61,11 +66,12 @@ nav h2 {
 
 /* Main content styling */
 main {
-    max-width: 800px;
-    margin: 0 auto;
+    flex-grow: 1;
+    margin-left: 280px;
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
+    min-height: calc(100vh - 60px);
 }
 
 article h2 {
