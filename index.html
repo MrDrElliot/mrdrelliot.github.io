@@ -15,7 +15,6 @@
         <nav>
             <h2>Categories</h2>
             <ul id="blog-categories">
-                <!-- Gameplay Ability System Category -->
                 <li>
                     <h3>Gameplay Ability System</h3>
                     <ul class="sub-group">
@@ -23,7 +22,6 @@
                         <li><a href="attributes.html">Attributes</a></li>
                     </ul>
                 </li>
-                <!-- Networking Category -->
                 <li>
                     <h3>Networking</h3>
                     <ul class="sub-group">
@@ -36,7 +34,7 @@
         </nav>
 
         <main>
-            <section id="blog-content">
+            <section id="blog-content" class="fade-in">
                 <!-- Blog content will go here -->
             </section>
         </main>
@@ -45,5 +43,27 @@
     <footer>
         <p>© 2024 Dr. Elliot. All rights reserved.</p>
     </footer>
+
+    <!-- Fade-in script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fadeIns = document.querySelectorAll('.fade-in');
+            let windowHeight = window.innerHeight;
+
+            function checkPosition() {
+                for (let i = 0; i < fadeIns.length; i++) {
+                    let element = fadeIns[i];
+                    let positionFromTop = element.getBoundingClientRect().top;
+
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('fade-in-visible');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', checkPosition);
+            checkPosition();
+        });
+    </script>
 </body>
 </html>

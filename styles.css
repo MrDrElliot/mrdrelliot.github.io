@@ -9,7 +9,7 @@ body {
 
 /* Header */
 header {
-    background-color: #1c1c1c; /* Dark header background */
+    background-color: #1c1c1c;
     padding: 15px 20px;
     border-bottom: 2px solid #333333;
     position: fixed;
@@ -28,7 +28,6 @@ header h1 {
 /* Container */
 .container {
     display: flex;
-    min-height: 100vh;
     padding-top: 60px; /* Offset for fixed header */
 }
 
@@ -87,9 +86,11 @@ nav h2 {
 
 /* Main Content */
 main {
-    margin-left: 270px;
+    margin-left: 270px; /* Space for the fixed sidebar */
     padding: 20px;
     flex: 1;
+    padding-top: 60px; /* Offset for the fixed header */
+    overflow-y: auto;
 }
 
 #blog-content {
@@ -97,6 +98,17 @@ main {
     padding: 20px;
     border-radius: 8px;
 }
+
+/* Fade-in styles */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
+}
+
 
 /* Footer */
 footer {
