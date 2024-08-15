@@ -3,27 +3,46 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* White text */
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Header */
+header {
+    background-color: #1c1c1c; /* Dark header background */
+    padding: 15px 20px;
+    border-bottom: 2px solid #333333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
 }
 
 /* Container */
 .container {
     display: flex;
     min-height: 100vh;
+    padding-top: 60px; /* Offset for fixed header */
 }
 
 /* Navigation (Sidebar) */
 nav {
     width: 250px;
-    background-color: #1c1c1c; /* Slightly lighter dark grey */
+    background-color: #1c1c1c;
     padding: 20px;
-    border-right: 2px solid #333333; /* Border for separation */
-    position: fixed; /* Fixed position to stay on the left */
-    top: 0;
+    border-right: 2px solid #333333;
+    position: fixed;
+    top: 60px; /* Offset for fixed header */
     left: 0;
     bottom: 0;
-    overflow-y: auto; /* Scrollable if content overflows */
+    overflow-y: auto;
 }
 
 nav h2 {
@@ -53,7 +72,7 @@ nav h2 {
 
 #blog-categories .sub-group li a {
     text-decoration: none;
-    color: #b3b3b3; /* Light grey for sub-categories */
+    color: #b3b3b3;
     font-size: 16px;
     display: block;
     padding: 5px 0;
@@ -62,19 +81,19 @@ nav h2 {
 
 #blog-categories > li > h3:hover,
 #blog-categories .sub-group li a:hover {
-    color: #ffffff; /* Highlight white on hover */
-    text-shadow: 0 0 5px #ffffff; /* Glow effect on hover */
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
 }
 
 /* Main Content */
 main {
-    margin-left: 270px; /* Space for the fixed sidebar */
+    margin-left: 270px;
     padding: 20px;
     flex: 1;
 }
 
 #blog-content {
-    background-color: #1c1c1c; /* Match sidebar color */
+    background-color: #1c1c1c;
     padding: 20px;
     border-radius: 8px;
 }
