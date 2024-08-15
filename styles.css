@@ -1,97 +1,96 @@
-/* Resetting default browser styles */
-* {
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
 }
 
-/* Dark mode theme */
-body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-}
-
+/* Container */
 .container {
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
+    min-height: 100vh;
 }
 
-/* Navigation styling */
+/* Navigation (Sidebar) */
 nav {
-    width: 300px; /* Increased width */
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    bottom: 20px;
+    width: 250px;
+    background-color: #1c1c1c; /* Slightly lighter dark grey */
     padding: 20px;
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    border: 1px solid #bb86fc;
-    overflow-y: auto;
+    border-right: 2px solid #333333; /* Border for separation */
+    position: fixed; /* Fixed position to stay on the left */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto; /* Scrollable if content overflows */
 }
 
 nav h2 {
-    font-size: 1.8em;
+    color: #ffffff;
     margin-bottom: 20px;
-    color: #03dac5;
-    text-align: center;
 }
 
 #blog-categories {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.sub-group {
-    list-style-type: none;
+#blog-categories > li > h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin: 10px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#blog-categories .sub-group {
+    list-style: none;
     padding-left: 20px;
+    margin: 10px 0;
 }
 
-.sub-group li {
-    margin-bottom: 10px;
-}
-
-.sub-group li a {
+#blog-categories .sub-group li a {
     text-decoration: none;
-    color: #e0e0e0;
-    font-size: 1.1em;
+    color: #b3b3b3; /* Light grey for sub-categories */
+    font-size: 16px;
+    display: block;
+    padding: 5px 0;
+    transition: all 0.2s ease-in-out;
 }
 
-sub-group li a:hover {
-    color: #bb86fc;
+#blog-categories > li > h3:hover,
+#blog-categories .sub-group li a:hover {
+    color: #ffffff; /* Highlight white on hover */
+    text-shadow: 0 0 5px #ffffff; /* Glow effect on hover */
 }
 
-/* Main content styling */
+/* Main Content */
 main {
-    flex-grow: 1;
-    margin-left: 330px; /* Adjusted to match the increased nav width */
+    margin-left: 270px; /* Space for the fixed sidebar */
     padding: 20px;
-    background-color: #1e1e1e;
+    flex: 1;
+}
+
+#blog-content {
+    background-color: #1c1c1c; /* Match sidebar color */
+    padding: 20px;
     border-radius: 8px;
-    min-height: calc(100vh - 60px);
 }
 
-article h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #bb86fc;
-}
-
-article p {
-    margin-bottom: 20px;
-}
-
-/* Footer styling */
+/* Footer */
 footer {
+    background-color: #1c1c1c;
+    color: #b3b3b3;
     text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #666;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 2px solid #333333;
 }
 
 footer p {
-    color: #e0e0e0;
+    margin: 0;
 }
