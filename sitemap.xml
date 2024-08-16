@@ -5,13 +5,16 @@
     <loc>https://mrdrelliot.github.io/</loc>
     <lastmod>2024-08-16T12:29:09-05:00</lastmod>
   </url><url>
-    <loc>https://mrdrelliot.github.io/posts/gas/intro/</loc>
+    <loc>https://mrdrelliot.github.io/gas/</loc>
     <lastmod>2024-08-16T12:29:09-05:00</lastmod>
   </url><url>
-    <loc>https://mrdrelliot.github.io/posts/</loc>
+    <loc>https://mrdrelliot.github.io/gas/intro/</loc>
     <lastmod>2024-08-16T12:29:09-05:00</lastmod>
   </url><url>
-    <loc>https://mrdrelliot.github.io/posts/memory/buffers/</loc>
+    <loc>https://mrdrelliot.github.io/memory/</loc>
+    <lastmod>2024-08-16T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://mrdrelliot.github.io/memory/buffers/</loc>
     <lastmod>2024-08-16T12:28:45-05:00</lastmod>
   </url><url>
     <loc>https://mrdrelliot.github.io/about/</loc>
@@ -20,7 +23,10 @@
     <loc>https://mrdrelliot.github.io/about/aboutme/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
-    <loc>https://mrdrelliot.github.io/posts/networking/networkserialization/</loc>
+    <loc>https://mrdrelliot.github.io/networking/networkserialization/</loc>
+    <lastmod>2024-08-16T10:28:54-05:00</lastmod>
+  </url><url>
+    <loc>https://mrdrelliot.github.io/networking/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
     <loc>https://mrdrelliot.github.io/series/</loc>

@@ -204,18 +204,6 @@
                 
                 
             
-            
-                
-                
-            
-                
-                
-            
-        
-        
-            
-
-            
                 
                 
             
@@ -240,6 +228,50 @@
                 
                 
             
+                
+                
+            
+                
+                
+            
+            
+                
+                
+            
+                
+                
+            
+        
+        
+            
+
+            
+                
+                
+            
+                
+                
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/networking/">Networking</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="https://mrdrelliot.github.io/networking/networkserialization/">Network Serialization</a>
+                            </li>
+                        
+                    
+                
+            
             
                 
                 
@@ -258,6 +290,26 @@
                 
                 
             
+                
+                
+                    <li class="heading">
+                        <a href="/memory/">Memory</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="https://mrdrelliot.github.io/memory/buffers/">Working With Buffers</a>
+                            </li>
+                        
+                    
+                
+            
+                
+                
+            
             
                 
                 
@@ -269,6 +321,26 @@
         
             
 
+            
+                
+                
+            
+                
+                
+                    <li class="heading">
+                        <a href="/gas/">Gameplay Ability System</a>
+                    </li>
+                    
+                        <li class="sub-heading">
+                            
+                        </li>
+                        
+                            <li class="bullet">
+                                <a href="https://mrdrelliot.github.io/gas/intro/">Intro</a>
+                            </li>
+                        
+                    
+                
             
                 
                 
@@ -328,132 +400,6 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
                 <div class="posts">
     
     
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://mrdrelliot.github.io/posts/gas/intro/">Intro</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-08-16T12:29:09-0500" class="post-date">
-        August 16, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>0 min read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://mrdrelliot.github.io/posts/memory/buffers/">Working With Buffers</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-08-16T12:28:45-0500" class="post-date">
-        August 16, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>2 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.
-Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&lt;std::byte&gt; buffer:
-#include &lt;vector&gt; #include &lt;cstdint&gt; #include &lt;cstring&gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&lt;std::byte&gt; buffer; // Example data std::vector&lt;uint32_t&gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.
-        
-        <div class="read-more-link">
-            <a href="/posts/memory/buffers/">Read More…</a>
-        </div>
-        
-        
-    </article>
-    <article class="post">
-        <div class="info">
-  <h1 class="post-title">
-    <a href="https://mrdrelliot.github.io/posts/networking/networkserialization/">Network Serialization in Unreal Engine C&#43;&#43;</a>
-  </h1>
-
-  <div class="headline">
-    <div>
-      
-      
-      <time datetime=" 2024-08-16T10:28:54-0500" class="post-date">
-        August 16, 2024
-      </time>
-      
-      <span> - </span>
-      <span class="reading-time">
-        
-          
-        
-
-        <span>10 mins read</span>
-      </span>
-    </div>
-
-    
-  </div>
-
-  
-  
-
-  
-</div>
-
-        
-        Hello, I wanted to talk about some ways you can improve networking performance in C++ by understanding and implementing efficient network serialization in Unreal Engine. Effective serialization is critical for transmitting data across the network without unnecessary overhead, especially in multiplayer games where bandwidth is limited.
-This article assumes basic familiarization with Unreal Engine&rsquo;s networking system.
-What is Network Serialization? Serialization in the context of networking refers to the process of converting data into a format that can be easily transmitted over a network and reconstructed later.
-        
-        <div class="read-more-link">
-            <a href="/posts/networking/networkserialization/">Read More…</a>
-        </div>
-        
-        
-    </article>
 </div>
 
 
