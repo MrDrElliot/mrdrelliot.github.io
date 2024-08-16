@@ -442,7 +442,7 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 </span></span></code></pre></div><p>In this example, the buffer is resized to hold the data, and each <code>uint32_t</code> value is copied into the buffer at the appropriate offset.</p>
 <h2 id="simplified-buffer-management-in-unreal-engine">Simplified Buffer Management in Unreal Engine</h2>
 <p>Unreal Engine simplifies this process with its <code>FMemoryReader</code> and <code>FMemoryWriter</code> classes. These classes handle the serialization and deserialization of data, abstracting away manual memory management.</p>
-<h3 id="using-fmemorywriter">Using <code>FMemoryWriter</code></h3>
+<h3 id="using-fmemorywriter">Using <strong>FMemoryWriter</strong></h3>
 <p>To write data to a buffer, use <code>FMemoryWriter</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Serialization/MemoryWriter.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Containers/Array.h&#34;</span><span style="color:#75715e">
@@ -458,7 +458,7 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 </span></span><span style="display:flex;"><span>        Writer <span style="color:#f92672">&lt;&lt;</span> SomeInt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="using-fmemoryreader">Using <code>FMemoryReader</code></h3>
+</span></span></code></pre></div><h3 id="using-fmemoryreader">Using <strong>FMemoryReader</strong></h3>
 <p>To read data from a buffer, use <code>FMemoryReader</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Serialization/MemoryReader.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Containers/Array.h&#34;</span><span style="color:#75715e">
@@ -506,8 +506,8 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
     <li><a href="#raw-c-buffer-management">Raw C++ Buffer Management</a></li>
     <li><a href="#simplified-buffer-management-in-unreal-engine">Simplified Buffer Management in Unreal Engine</a>
       <ul>
-        <li><a href="#using-fmemorywriter">Using <code>FMemoryWriter</code></a></li>
-        <li><a href="#using-fmemoryreader">Using <code>FMemoryReader</code></a></li>
+        <li><a href="#using-fmemorywriter">Using <strong>FMemoryWriter</strong></a></li>
+        <li><a href="#using-fmemoryreader">Using <strong>FMemoryReader</strong></a></li>
         <li><a href="#explanation">Explanation</a></li>
       </ul>
     </li>
