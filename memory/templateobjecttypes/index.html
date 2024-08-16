@@ -47,41 +47,43 @@
 
 
   
+
+
+
+
+
   
-
-
-
-
+  
+  
 
 
 <!-- Open Graph image and Twitter Card metadata -->
 
-<title itemprop="name">Dr. Elliot</title>
-<meta property="og:title" content=Dr.&#32;Elliot />
-<meta name="twitter:title" content=Dr.&#32;Elliot />
-<meta itemprop="name" content=Dr.&#32;Elliot />
-<meta name="application-name" content=Dr.&#32;Elliot />
+<title itemprop="name">Dr. Elliot - Templated Object Types</title>
+<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;Templated&#32;Object&#32;Types />
+<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;Templated&#32;Object&#32;Types />
+<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;Templated&#32;Object&#32;Types />
+<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;Templated&#32;Object&#32;Types />
 <meta property="og:site_name" content="Dr. Elliot" />
 
 
-<meta name="description" content="A collection of things I&#39;ve learned using Unreal Engine." />
-<meta itemprop="description" content="A collection of things I&#39;ve learned using Unreal Engine." />
-<meta property="og:description" content="A collection of things I&#39;ve learned using Unreal Engine." />
-<meta name="twitter:description" content="A collection of things I&#39;ve learned using Unreal Engine." />
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
 
-<base href="https://mrdrelliot.github.io/" />
-<link rel="canonical" href="https://mrdrelliot.github.io/" itemprop="url" />
-<meta name="url" content="https://mrdrelliot.github.io/" />
-<meta name="twitter:url" content="https://mrdrelliot.github.io/" />
-<meta property="og:url" content="https://mrdrelliot.github.io/" />
+<base href="https://mrdrelliot.github.io/memory/templateobjecttypes/" />
+<link rel="canonical" href="https://mrdrelliot.github.io/memory/templateobjecttypes/" itemprop="url" />
+<meta name="url" content="https://mrdrelliot.github.io/memory/templateobjecttypes/" />
+<meta name="twitter:url" content="https://mrdrelliot.github.io/memory/templateobjecttypes/" />
+<meta property="og:url" content="https://mrdrelliot.github.io/memory/templateobjecttypes/" />
 
 
 <meta property="og:updated_time" content="2024-08-16T14:31:08-05:00" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://mrdrelliot.github.io/sitemap.xml' />
-<link href="https://mrdrelliot.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Dr. Elliot" />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -434,15 +436,113 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 </aside>
 
             <main class="content container">
-                <div class="posts">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="https://mrdrelliot.github.io/memory/templateobjecttypes/">Templated Object Types</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2024-08-16T14:31:08-0500" class="post-date">
+        August 16, 2024
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
     
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <hr>
+<p>Unreal Engine provides various templated object pointer types that help manage memory and references to <code>UObject</code> instances in a safe and efficient manner. These templated types are vital for ensuring the stability and performance of your Unreal Engine projects. In this post, we&rsquo;ll explore the most common templated object pointer types, explain what they do, and discuss when to use them.</p>
+<h3 id="1-tobjectptr">1. <strong>TObjectPtr&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TObjectPtr</code> is a smart pointer introduced in Unreal Engine 5, designed to replace raw pointers for referencing <code>UObject</code> types. It provides enhanced memory safety by automatically handling the lifetime of the referenced object.
+It was introduced in 5.0 and is now becoming the new norm, especially with the new <code>incremental garbage collection</code> being implemented in Unreal Engine 5.4.</p>
+<p><strong>Use Case:</strong> Use <code>TObjectPtr</code> when you want to ensure safe and efficient references to <code>UObject</code> instances, particularly when ownership semantics are important, and to be allow for reference tracking.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TObjectPtr<span style="color:#f92672">&lt;</span>UTexture2D<span style="color:#f92672">&gt;</span> MyTexture;
+</span></span></code></pre></div><h3 id="2-tweakobjectptr">2. <strong>TWeakObjectPtr&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TWeakObjectPtr</code> is a non-owning smart pointer that references a <code>UObject</code> without preventing it from being garbage collected. It allows you to check if the object is still valid before accessing it.</p>
+<p><strong>Use Case:</strong> Use <code>TWeakObjectPtr</code> when you need a reference to a <code>UObject</code> that might be destroyed or unloaded, and you don&rsquo;t want to keep it alive unnecessarily.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TWeakObjectPtr<span style="color:#f92672">&lt;</span>AActor<span style="color:#f92672">&gt;</span> WeakActorPtr;
+</span></span></code></pre></div><h3 id="3-tsoftobjectptr">3. <strong>TSoftObjectPtr&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TSoftObjectPtr</code> is a smart pointer that holds a reference to a <code>UObject</code> asset by its path, without loading the asset into memory until it&rsquo;s explicitly needed. This is useful for optimizing memory usage.</p>
+<p><strong>Use Case:</strong> Use <code>TSoftObjectPtr</code> for assets that are not immediately needed, such as optional or large assets, where you want to load them only when required.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TSoftObjectPtr<span style="color:#f92672">&lt;</span>UTexture2D<span style="color:#f92672">&gt;</span> SoftTexture;
+</span></span></code></pre></div><h3 id="4-tsoftclassptr">4. <strong>TSoftClassPtr&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TSoftClassPtr</code> is similar to <code>TSoftObjectPtr</code>, but it specifically references a class instead of an object. It holds the class by its path and loads it only when necessary.</p>
+<p><strong>Use Case:</strong> Use <code>TSoftClassPtr</code> when you want to reference a class that may not be needed immediately, such as a blueprint class or a specific gameplay actor class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TSoftClassPtr<span style="color:#f92672">&lt;</span>AActor<span style="color:#f92672">&gt;</span> SoftActorClass;
+</span></span></code></pre></div><h3 id="5-tsubclassof">5. <strong>TSubclassOf&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TSubclassOf</code> is a templated class used to store references to classes derived from a specified base class. It ensures that only valid subclasses are assigned to the variable, which is particularly useful for blueprint interactions.</p>
+<p><strong>Use Case:</strong> Use <code>TSubclassOf</code> when you need to reference a class type, especially when dealing with blueprints or dynamically spawning actors.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TSubclassOf<span style="color:#f92672">&lt;</span>AActor<span style="color:#f92672">&gt;</span> ActorSubclass;
+</span></span></code></pre></div><h3 id="6-tlazyobjectptr">6. <strong>TLazyObjectPtr&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TLazyObjectPtr</code> is designed to handle objects that might be unloaded and reloaded during gameplay. It maintains a reference to the object even if it is unloaded and can resolve it when the object is reloaded.</p>
+<p><strong>Use Case:</strong> Use <code>TLazyObjectPtr</code> when referencing objects that might be dynamically loaded or unloaded, such as with level streaming or large datasets.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TLazyObjectPtr<span style="color:#f92672">&lt;</span>AActor<span style="color:#f92672">&gt;</span> LazyActorPtr;
+</span></span></code></pre></div><h3 id="7-tscriptinterface">7. <strong>TScriptInterface&lt;&gt;</strong></h3>
+<p><strong>Purpose:</strong> <code>TScriptInterface</code> is a templated type that holds a reference to an object that implements a specific interface. It allows interaction with the interface without knowing the underlying object type.</p>
+<p><strong>Use Case:</strong> Use <code>TScriptInterface</code> when you need to interact with different objects through a common interface, especially useful in blueprint scripting and interface-driven design.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TScriptInterface<span style="color:#f92672">&lt;</span>IMyInterface<span style="color:#f92672">&gt;</span> InterfacePtr;
+</span></span></code></pre></div><h3 id="conclusion">Conclusion</h3>
+<p>Each of these templated object pointer types in Unreal Engine serves a specific purpose in managing references to <code>UObject</code> instances, ensuring safe memory management and optimal performance. Understanding when and how to use these types is essential for effective Unreal Engine development. By mastering these pointers, you can write more robust, efficient, and maintainable code.</p>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="https://mrdrelliot.github.io/memory/softreferences/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>What Are Soft References?</a>
+        
+	    
     
 </div>
 
-
-
+  
+</div>
             </main>
             
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-tobjectptr">1. <strong>TObjectPtr&lt;&gt;</strong></a></li>
+        <li><a href="#2-tweakobjectptr">2. <strong>TWeakObjectPtr&lt;&gt;</strong></a></li>
+        <li><a href="#3-tsoftobjectptr">3. <strong>TSoftObjectPtr&lt;&gt;</strong></a></li>
+        <li><a href="#4-tsoftclassptr">4. <strong>TSoftClassPtr&lt;&gt;</strong></a></li>
+        <li><a href="#5-tsubclassof">5. <strong>TSubclassOf&lt;&gt;</strong></a></li>
+        <li><a href="#6-tlazyobjectptr">6. <strong>TLazyObjectPtr&lt;&gt;</strong></a></li>
+        <li><a href="#7-tscriptinterface">7. <strong>TScriptInterface&lt;&gt;</strong></a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+  
+
         </div>
     </body>
 </html>
