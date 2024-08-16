@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dr. Elliot</title>
-    <link>https://mrdrelliot.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Dr. Elliot</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Aug 2024 12:29:09 -0500</lastBuildDate>
-    <atom:link href="https://mrdrelliot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Intro</title>
-      <link>https://mrdrelliot.github.io/gas/intro/</link>
+      <link>http://localhost:1313/gas/intro/</link>
       <pubDate>Fri, 16 Aug 2024 12:29:09 -0500</pubDate>
-      <guid>https://mrdrelliot.github.io/gas/intro/</guid>
+      <guid>http://localhost:1313/gas/intro/</guid>
       <description></description>
     </item>
     <item>
       <title>Working With Buffers</title>
-      <link>https://mrdrelliot.github.io/memory/buffers/</link>
+      <link>http://localhost:1313/memory/buffers/</link>
       <pubDate>Fri, 16 Aug 2024 12:28:45 -0500</pubDate>
-      <guid>https://mrdrelliot.github.io/memory/buffers/</guid>
+      <guid>http://localhost:1313/memory/buffers/</guid>
       <description>In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.&#xA;Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&amp;lt;std::byte&amp;gt; buffer:&#xA;#include &amp;lt;vector&amp;gt; #include &amp;lt;cstdint&amp;gt; #include &amp;lt;cstring&amp;gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&amp;lt;std::byte&amp;gt; buffer; // Example data std::vector&amp;lt;uint32_t&amp;gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.</description>
     </item>
     <item>
       <title>About Me</title>
-      <link>https://mrdrelliot.github.io/about/aboutme/</link>
+      <link>http://localhost:1313/about/aboutme/</link>
       <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
-      <guid>https://mrdrelliot.github.io/about/aboutme/</guid>
+      <guid>http://localhost:1313/about/aboutme/</guid>
       <description>Hello, and welcome to my blog! I&amp;rsquo;m an Unreal Engine developer with a strong focus on networking and gameplay systems. With over three years of experience working in the engine, I&amp;rsquo;ve honed my skills in C++ and C, crafting efficient and scalable solutions for real-time multiplayer experiences.&#xA;Beyond development, I&amp;rsquo;m an avid gamer, deeply inspired by the intricate worlds and narratives of classics like Fallout 3 and Fallout: New Vegas. These games have shaped my understanding of immersive gameplay and the importance of robust systems.</description>
     </item>
     <item>
       <title>Network Serialization in Unreal Engine C&#43;&#43;</title>
-      <link>https://mrdrelliot.github.io/networking/networkserialization/</link>
+      <link>http://localhost:1313/networking/networkserialization/</link>
       <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
-      <guid>https://mrdrelliot.github.io/networking/networkserialization/</guid>
+      <guid>http://localhost:1313/networking/networkserialization/</guid>
       <description>Hello, I wanted to talk about some ways you can improve networking performance in C++ by understanding and implementing efficient network serialization in Unreal Engine. Effective serialization is critical for transmitting data across the network without unnecessary overhead, especially in multiplayer games where bandwidth is limited.&#xA;This article assumes basic familiarization with Unreal Engine&amp;rsquo;s networking system.&#xA;What is Network Serialization? Serialization in the context of networking refers to the process of converting data into a format that can be easily transmitted over a network and reconstructed later.</description>
     </item>
   </channel>

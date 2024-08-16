@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Memory on Dr. Elliot</title>
-    <link>https://mrdrelliot.github.io/memory/</link>
+    <link>http://localhost:1313/memory/</link>
     <description>Recent content in Memory on Dr. Elliot</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Aug 2024 12:28:45 -0500</lastBuildDate>
-    <atom:link href="https://mrdrelliot.github.io/memory/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/memory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Working With Buffers</title>
-      <link>https://mrdrelliot.github.io/memory/buffers/</link>
+      <link>http://localhost:1313/memory/buffers/</link>
       <pubDate>Fri, 16 Aug 2024 12:28:45 -0500</pubDate>
-      <guid>https://mrdrelliot.github.io/memory/buffers/</guid>
+      <guid>http://localhost:1313/memory/buffers/</guid>
       <description>In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.&#xA;Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&amp;lt;std::byte&amp;gt; buffer:&#xA;#include &amp;lt;vector&amp;gt; #include &amp;lt;cstdint&amp;gt; #include &amp;lt;cstring&amp;gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&amp;lt;std::byte&amp;gt; buffer; // Example data std::vector&amp;lt;uint32_t&amp;gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.</description>
     </item>
   </channel>
