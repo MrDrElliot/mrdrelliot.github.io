@@ -6,8 +6,15 @@
     <description>Recent content on Dr. Elliot</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Aug 2024 13:46:48 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 16 Aug 2024 14:31:08 -0500</lastBuildDate>
     <atom:link href="https://mrdrelliot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What Are Soft References?</title>
+      <link>https://mrdrelliot.github.io/memory/softreferences/</link>
+      <pubDate>Fri, 16 Aug 2024 14:31:08 -0500</pubDate>
+      <guid>https://mrdrelliot.github.io/memory/softreferences/</guid>
+      <description>What Are Soft References? Soft references are a way to reference an object in Unreal Engine without forcing it to stay in memory. This can be incredibly useful in scenarios where you need to reference assets like textures, sounds, or even entire levels, but don’t want to load them into memory until absolutely necessary.&#xA;Why Use Soft References? Imagine your game has a massive library of assets. Loading everything at once would quickly consume your memory, leading to performance issues or, worse, crashing your game.</description>
+    </item>
     <item>
       <title>Blueprint vs C&#43;&#43;: Different Tools for Different Jobs</title>
       <link>https://mrdrelliot.github.io/general/bpvscpp/</link>
