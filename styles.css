@@ -90,25 +90,29 @@ main {
     padding: 20px;
     flex: 1;
     padding-top: 60px; /* Offset for the fixed header */
-    overflow-y: auto;
 }
 
 #blog-content {
     background-color: #1c1c1c;
     padding: 20px;
     border-radius: 8px;
+    position: relative;
 }
 
-/* Fade-in styles */
-.fade-in {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+/* Section Header (Fixed) */
+.section-header {
+    position: sticky;
+    top: 60px; /* Offset for the fixed header */
+    background-color: #1c1c1c;
+    padding: 10px 15px;
+    border-bottom: 2px solid #333333;
+    z-index: 10;
 }
 
-.fade-in-visible {
-    opacity: 1;
+/* Section Content */
+.section-content {
+    padding-top: 20px;
 }
-
 
 /* Footer */
 footer {
@@ -124,4 +128,14 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+/* Fade-in styles */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
 }
