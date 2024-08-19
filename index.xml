@@ -34,7 +34,14 @@
       <link>https://mrdrelliot.github.io/general/bpvscpp/</link>
       <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
       <guid>https://mrdrelliot.github.io/general/bpvscpp/</guid>
-      <description>C++ Is Not Better Than Blueprint—They’re Just Different You’ve probably heard the argument before: “C++ is better than Blueprint.” Often, this comes from people who are new to using C++ in Unreal Engine and are riding the peak of the Dunning-Kruger effect.&#xA;The truth is, one isn’t better than the other—they’re just different. It’s like comparing a knife to a fork; they are different tools for different jobs. Claiming that C++ is superior to Blueprint, comes across as narcissistic.</description>
+      <description>C++ Is Not Better Than Blueprint—They’re Just Different You’ve probably heard the argument before: “C++ is better than Blueprint.” Often, this comes from people who are new to using C++ in Unreal Engine and are riding the peak of the Dunning-Kruger effect.&#xA;The truth is, one isn’t better than the other—they’re just different. It’s like comparing a knife to a fork; they are different tools for different jobs. Claiming that C++ is superior to Blueprint, comes across as arrogant.</description>
+    </item>
+    <item>
+      <title>The dangers of Lambdas</title>
+      <link>https://mrdrelliot.github.io/general/lambdadangers/</link>
+      <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
+      <guid>https://mrdrelliot.github.io/general/lambdadangers/</guid>
+      <description>Using Lambdas in Unreal can be dangerous! Lambdas, or anonymous functions, in Unreal Engine can be very useful for writing concise and flexible code. However, they come with certain dangers, particularly when dealing with the lifetime of objects and capturing variables by reference. Here’s why:&#xA;1. Capturing by Reference and Object Lifetimes When you use lambdas in Unreal Engine, you might capture variables by reference, which is common for avoiding unnecessary copying.</description>
     </item>
     <item>
       <title>Intro</title>
@@ -55,7 +62,7 @@
       <link>https://mrdrelliot.github.io/about/aboutme/</link>
       <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
       <guid>https://mrdrelliot.github.io/about/aboutme/</guid>
-      <description>Hello, and welcome to my blog! I&amp;rsquo;m an Unreal Engine developer with a strong focus on networking and gameplay systems. I&amp;rsquo;ve been using the engine for a little under three years, with a strong focus on gaining as much knowledge as I can. I&amp;rsquo;ve shifted a majority of my focus to learning more advanced networking techniques, and lately as been a focus on the Gameplay Ability System.&#xA;Beyond development, I&amp;rsquo;m an avid gamer, deeply inspired by the intricate worlds and narratives of classics like Fallout 3 and Fallout: New Vegas.</description>
+      <description>Hello, and welcome to my blog! I&amp;rsquo;m an Unreal Engine developer specializing in networking and gameplay systems. I&amp;rsquo;ve been working with the engine for just over two years, driven by a passion for expanding my knowledge.&#xA;Lately, I&amp;rsquo;ve been diving deep into advanced networking techniques, as well as on the Gameplay Ability System.&#xA;Outside of development, I&amp;rsquo;m a passionate gamer, inspired by the rich worlds and narratives of classics like Fallout 3 and Fallout: New Vegas.</description>
     </item>
     <item>
       <title>Network Serialization</title>

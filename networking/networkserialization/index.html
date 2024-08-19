@@ -247,6 +247,10 @@
                                 <a href="https://mrdrelliot.github.io/general/bpvscpp/">Blueprint vs C&#43;&#43;: Different Tools for Different Jobs</a>
                             </li>
                         
+                            <li class="bullet">
+                                <a href="https://mrdrelliot.github.io/general/lambdadangers/">The dangers of Lambdas</a>
+                            </li>
+                        
                     
                 
             
@@ -479,7 +483,7 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 <p>Serialization in the context of networking refers to the process of converting data into a format that can be easily transmitted over a network and reconstructed later. In Unreal Engine, this process is crucial for ensuring that game states, variables, and objects are accurately synchronized between clients and servers.</p>
 <h3 id="unreal-engines-built-in-serialization">Unreal Engine&rsquo;s Built-in Serialization</h3>
 <p>Unreal Engine provides built-in support for serialization with its powerful reflection system. This system can automatically serialize properties marked with specific macros, making it easy to sync variables across the network.</p>
-<p>Here’s an example of a simple struct that can be serialized:</p>
+<p>Here’s an example of a simple struct that can be serialized, and forcing it to be atomic:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>USTRUCT(BlueprintType)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FPlayerData</span>
 </span></span><span style="display:flex;"><span>{
@@ -641,7 +645,7 @@ the <code>write</code> mode with <code>Ar.IsSaving</code> or the <code>read</cod
 <p>Let&rsquo;s say you have a very very large structure, but that structure might not always be full of every piece of information that can be packaged into it, do we still have to replicate all the properties in the struct even if they&rsquo;re empty?
 <strong>NO</strong>.</p>
 <p>We can take advantage of the NetSerialize and access to the FArchive responsible by implementing something called <code>Bit Counting</code> or <code> Rep Bit Counting</code></p>
-<p><code>Bit Counting</code> is when you pack informatin into a bit <code>uint8</code> <code>uint32</code> (or whatever you suits your requirements) and determine what needs to get packaged up during the <code>Ar.IsSaving</code> phase. Let&rsquo;s take a look at <code>FGameplayEffectContext</code> from that <code>Gameplay Ability System</code></p>
+<p><code>Bit Counting</code> is when you pack informatin into a bit <code>uint8</code> <code>uint32</code> (or whatever you suits your requirements) and determine what needs to get packaged up during the <code>Ar.IsSaving</code> phase. Let&rsquo;s take a look at <code>FGameplayEffectContext</code> from the <code>Gameplay Ability System</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> FGameplayEffectContext<span style="color:#f92672">::</span>NetSerialize(FArchive<span style="color:#f92672">&amp;</span> Ar, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPackageMap</span><span style="color:#f92672">*</span> Map, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&amp;</span> bOutSuccess)
 </span></span><span style="display:flex;"><span>{

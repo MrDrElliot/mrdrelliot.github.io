@@ -50,20 +50,20 @@
 
 
 
-  
-  
-  
 
 
+  
+  
+  
 
 
 <!-- Open Graph image and Twitter Card metadata -->
 
-<title itemprop="name">Dr. Elliot - Gas</title>
-<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;Gas />
-<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;Gas />
-<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;Gas />
-<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;Gas />
+<title itemprop="name">Dr. Elliot - The dangers of Lambdas</title>
+<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;The&#32;dangers&#32;of&#32;Lambdas />
+<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;The&#32;dangers&#32;of&#32;Lambdas />
+<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;The&#32;dangers&#32;of&#32;Lambdas />
+<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;The&#32;dangers&#32;of&#32;Lambdas />
 <meta property="og:site_name" content="Dr. Elliot" />
 
 
@@ -73,18 +73,17 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="https://mrdrelliot.github.io/gas/" />
-<link rel="canonical" href="https://mrdrelliot.github.io/gas/" itemprop="url" />
-<meta name="url" content="https://mrdrelliot.github.io/gas/" />
-<meta name="twitter:url" content="https://mrdrelliot.github.io/gas/" />
-<meta property="og:url" content="https://mrdrelliot.github.io/gas/" />
+<base href="https://mrdrelliot.github.io/general/lambdadangers/" />
+<link rel="canonical" href="https://mrdrelliot.github.io/general/lambdadangers/" itemprop="url" />
+<meta name="url" content="https://mrdrelliot.github.io/general/lambdadangers/" />
+<meta name="twitter:url" content="https://mrdrelliot.github.io/general/lambdadangers/" />
+<meta property="og:url" content="https://mrdrelliot.github.io/general/lambdadangers/" />
 
 
-<meta property="og:updated_time" content="2024-08-16T12:29:09-05:00" />
+<meta property="og:updated_time" content="2024-08-16T13:46:48-05:00" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://mrdrelliot.github.io/sitemap.xml' />
-<link href="https://mrdrelliot.github.io/gas/index.xml" rel="alternate" type="application/rss+xml" title="Dr. Elliot" />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -445,25 +444,111 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 </aside>
 
             <main class="content container">
-                <h1 class="title">Gas</h1>
-<ul class="entries">
-    
-        <h3 style="text-align: center;">2024</h3>
-        
-            <li>
-                <span class="title">
-                    <a href="/gas/intro/">Intro</a>
-                </span>
-                <span class="published">
-                    <time class="pull-right post-list">August 16, 2024</time>
-                </span>
-            </li>
-        
-    
-</ul>
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="https://mrdrelliot.github.io/general/lambdadangers/">The dangers of Lambdas</a>
+  </h1>
 
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2024-08-16T13:46:48-0500" class="post-date">
+        August 16, 2024
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>3 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <h1 id="using-lambdas-in-unreal-can-be-dangerous">Using Lambdas in Unreal can be dangerous!</h1>
+<hr>
+<p>Lambdas, or anonymous functions, in Unreal Engine can be very useful for writing concise and flexible code. However, they come with certain dangers, particularly when dealing with the lifetime of objects and capturing variables by reference. Here’s why:</p>
+<h3 id="1-capturing-by-reference-and-object-lifetimes">1. <strong>Capturing by Reference and Object Lifetimes</strong></h3>
+<p>When you use lambdas in Unreal Engine, you might capture variables by reference, which is common for avoiding unnecessary copying. However, if the lambda is executed asynchronously (e.g., in a timer, or a delegate callback), the objects referenced might be destroyed or go out of scope by the time the lambda is executed. This leads to dereferencing invalid memory, causing crashes with errors like:</p>
+<pre tabindex="0"><code>Unhandled Exception: EXCEPTION_ACCESS_VIOLATION reading address 0x0000000000000000
+</code></pre><p>This particular error occurs because the lambda is trying to access an object or memory location that no longer exists, often leading to a null pointer dereference.</p>
+<h3 id="2-deferred-execution">2. <strong>Deferred Execution</strong></h3>
+<p>In Unreal, many systems use deferred execution, where code is scheduled to run later (e.g., after a delay, or on the next frame). Lambdas are often used in these scenarios for their flexibility. However, if the lambda captures pointers or references to Unreal objects that may be garbage collected or destroyed before the lambda runs, the lambda will end up accessing invalid memory. This is especially problematic in cases where the object’s destruction isn’t under your control, such as when the object is managed by Unreal’s garbage collector.</p>
+<h3 id="3-complex-debugging">3. <strong>Complex Debugging</strong></h3>
+<p>Lambdas can obscure the flow of your code, making debugging more complex. When a crash happens inside a lambda, the stack trace might not clearly indicate where or why it occurred. This is because the lambda could be executed in a completely different context from where it was defined, making it difficult to track down the source of the problem.</p>
+<h3 id="4-capturing-this">4. <strong>Capturing <code>this</code></strong></h3>
+<p>Another common pitfall is capturing <code>this</code> inside a lambda. If the lambda is executed after the object has been destroyed, it will try to access a member function or variable of an object that no longer exists, leading to undefined behavior. This is particularly dangerous in Unreal, where object lifetimes are managed in complex ways, especially with asynchronous tasks.</p>
+<h3 id="how-to-mitigate-these-issues"><strong>How to Mitigate These Issues</strong></h3>
+<ol>
+<li>
+<p><strong>Prefer Capturing by Value:</strong> If possible, capture variables by value rather than by reference. This way, the lambda will have its own copy of the data, independent of the original object&rsquo;s lifetime.</p>
+</li>
+<li>
+<p><strong>Use <code>TWeakObjectPtr</code>:</strong> When capturing pointers to Unreal objects, consider using <code>TWeakObjectPtr</code> instead of raw pointers. <code>TWeakObjectPtr</code> will safely handle cases where the object is destroyed, allowing you to check if the object is still valid before accessing it.</p>
+</li>
+<li>
+<p><strong>Check for Validity:</strong> Before accessing any captured pointers or references, explicitly check their validity within the lambda. This includes checking if pointers are <code>nullptr</code> or if <code>TWeakObjectPtr</code> is still valid.</p>
+</li>
+<li>
+<p><strong>Keep Lambdas Small and Focused:</strong> Try to keep lambdas small and focused on a single task. This makes it easier to track down issues and reduces the likelihood of capturing unnecessary variables.</p>
+</li>
+<li>
+<p><strong>Using a <code>Weak Lambda</code>.</strong> Some may consider this a hack, but a <em>weak lambda</em> allows you to safely reference an object inside of a lambda, and avoid calling the lambda through the delegate if the owning object is invalid.</p>
+</li>
+</ol>
+<p>By being aware of these potential dangers and taking appropriate precautions, you can safely use lambdas in Unreal Engine without running into unexpected crashes or undefined behavior.</p>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+	    
+            <div class="next-post">
+                <a href="https://mrdrelliot.github.io/general/bpvscpp/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Blueprint vs C++: Different Tools for Different...</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
             </main>
             
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-capturing-by-reference-and-object-lifetimes">1. <strong>Capturing by Reference and Object Lifetimes</strong></a></li>
+        <li><a href="#2-deferred-execution">2. <strong>Deferred Execution</strong></a></li>
+        <li><a href="#3-complex-debugging">3. <strong>Complex Debugging</strong></a></li>
+        <li><a href="#4-capturing-this">4. <strong>Capturing <code>this</code></strong></a></li>
+        <li><a href="#how-to-mitigate-these-issues"><strong>How to Mitigate These Issues</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+  
+
         </div>
     </body>
 </html>

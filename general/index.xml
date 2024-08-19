@@ -13,7 +13,14 @@
       <link>https://mrdrelliot.github.io/general/bpvscpp/</link>
       <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
       <guid>https://mrdrelliot.github.io/general/bpvscpp/</guid>
-      <description>C++ Is Not Better Than Blueprint—They’re Just Different You’ve probably heard the argument before: “C++ is better than Blueprint.” Often, this comes from people who are new to using C++ in Unreal Engine and are riding the peak of the Dunning-Kruger effect.&#xA;The truth is, one isn’t better than the other—they’re just different. It’s like comparing a knife to a fork; they are different tools for different jobs. Claiming that C++ is superior to Blueprint, comes across as narcissistic.</description>
+      <description>C++ Is Not Better Than Blueprint—They’re Just Different You’ve probably heard the argument before: “C++ is better than Blueprint.” Often, this comes from people who are new to using C++ in Unreal Engine and are riding the peak of the Dunning-Kruger effect.&#xA;The truth is, one isn’t better than the other—they’re just different. It’s like comparing a knife to a fork; they are different tools for different jobs. Claiming that C++ is superior to Blueprint, comes across as arrogant.</description>
+    </item>
+    <item>
+      <title>The dangers of Lambdas</title>
+      <link>https://mrdrelliot.github.io/general/lambdadangers/</link>
+      <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
+      <guid>https://mrdrelliot.github.io/general/lambdadangers/</guid>
+      <description>Using Lambdas in Unreal can be dangerous! Lambdas, or anonymous functions, in Unreal Engine can be very useful for writing concise and flexible code. However, they come with certain dangers, particularly when dealing with the lifetime of objects and capturing variables by reference. Here’s why:&#xA;1. Capturing by Reference and Object Lifetimes When you use lambdas in Unreal Engine, you might capture variables by reference, which is common for avoiding unnecessary copying.</description>
     </item>
   </channel>
 </rss>
