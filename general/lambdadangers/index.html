@@ -505,10 +505,24 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 <p><strong>Keep Lambdas Small and Focused:</strong> Try to keep lambdas small and focused on a single task. This makes it easier to track down issues and reduces the likelihood of capturing unnecessary variables.</p>
 </li>
 <li>
-<p><strong>Using a <code>Weak Lambda</code>.</strong> Some may consider this a hack, but a <em>weak lambda</em> allows you to safely reference an object inside of a lambda, and avoid calling the lambda through the delegate if the owning object is invalid.</p>
+<p><strong>Using a <code>Weak Lambda</code>.</strong> Some may consider this a hack, but a <em>weak lambda</em> allows you to safely reference an object inside of a lambda, and avoid calling the lambda through the delegate if the owning object is invalid.
+&ndash; Here is a quick example of a weak lambda in use. Taken from <code>TestBTTask_TimerBasedLatent.cpp</code></p>
 </li>
 </ol>
-<p>By being aware of these potential dangers and taking appropriate precautions, you can safely use lambdas in Unreal Engine without running into unexpected crashes or undefined behavior.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">const</span> UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> OwnerComp.GetWorld())
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> DeltaTime <span style="color:#f92672">=</span> NumTicksExecuting <span style="color:#f92672">*</span> FAITestHelpers<span style="color:#f92672">::</span>TickInterval;
+</span></span><span style="display:flex;"><span>		World<span style="color:#f92672">-&gt;</span>GetTimerManager().SetTimer(TaskMemory<span style="color:#f92672">-&gt;</span>TimerHandle,
+</span></span><span style="display:flex;"><span>			FTimerDelegate<span style="color:#f92672">::</span>CreateWeakLambda(<span style="color:#66d9ef">this</span>, [<span style="color:#f92672">&amp;</span>OwnerComp, TaskMemory, <span style="color:#66d9ef">this</span>]() <span style="color:#75715e">// &lt;---- This is the declaration of a weak lambda
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			{
+</span></span><span style="display:flex;"><span>				TaskMemory<span style="color:#f92672">-&gt;</span>TimerHandle.Invalidate();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				ensure(<span style="color:#f92672">!</span>TaskMemory<span style="color:#f92672">-&gt;</span>bIsAborting);
+</span></span><span style="display:flex;"><span>				LogExecution(OwnerComp, LogIndexExecuteFinish);
+</span></span><span style="display:flex;"><span>				FinishLatentTask(OwnerComp, LogResult);
+</span></span><span style="display:flex;"><span>			}), DeltaTime, false);
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>By being aware of these potential dangers and taking appropriate precautions, you can safely use lambdas in Unreal Engine without running into unexpected crashes or undefined behavior.</p>
 
   
   <hr>
