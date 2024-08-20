@@ -16,6 +16,13 @@
       <description>C++ Is Not Better Than Blueprint—They’re Just Different You’ve probably heard the argument before: “C++ is better than Blueprint.” Often, this comes from people who are new to using C++ in Unreal Engine and are riding the peak of the Dunning-Kruger effect.&#xA;The truth is, one isn’t better than the other—they’re just different. It’s like comparing a knife to a fork; they are different tools for different jobs. Claiming that C++ is superior to Blueprint, comes across as arrogant.</description>
     </item>
     <item>
+      <title>Overuse of Inheritence, alternatives.</title>
+      <link>https://mrdrelliot.github.io/general/inheritenceoveruse/</link>
+      <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
+      <guid>https://mrdrelliot.github.io/general/inheritenceoveruse/</guid>
+      <description>Inheritance in object-oriented programming (OOP) is a fundamental concept that is deeply embedded in the design of Unreal Engine, and in many cases, it&amp;rsquo;s an elegant and powerful tool. However, like any tool, it can be overused, leading developers into a trap that can complicate development and maintenance in the long run.&#xA;The Trap of Overusing Inheritance Inheritance is often the go-to solution for sharing functionality across different classes. While it provides a straightforward way to extend and modify behavior, over-relying on it can lead to a rigid and tightly coupled codebase.</description>
+    </item>
+    <item>
       <title>The dangers of Lambdas</title>
       <link>https://mrdrelliot.github.io/general/lambdadangers/</link>
       <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>

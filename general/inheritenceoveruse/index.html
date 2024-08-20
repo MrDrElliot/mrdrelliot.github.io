@@ -52,14 +52,18 @@
 
 
 
+  
+  
+  
+
 
 <!-- Open Graph image and Twitter Card metadata -->
 
-<title itemprop="name">Dr. Elliot</title>
-<meta property="og:title" content=Dr.&#32;Elliot />
-<meta name="twitter:title" content=Dr.&#32;Elliot />
-<meta itemprop="name" content=Dr.&#32;Elliot />
-<meta name="application-name" content=Dr.&#32;Elliot />
+<title itemprop="name">Dr. Elliot - Overuse of Inheritence, alternatives.</title>
+<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;Overuse&#32;of&#32;Inheritence,&#32;alternatives. />
+<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;Overuse&#32;of&#32;Inheritence,&#32;alternatives. />
+<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;Overuse&#32;of&#32;Inheritence,&#32;alternatives. />
+<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;Overuse&#32;of&#32;Inheritence,&#32;alternatives. />
 <meta property="og:site_name" content="Dr. Elliot" />
 
 
@@ -69,18 +73,17 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="https://mrdrelliot.github.io/tags/" />
-<link rel="canonical" href="https://mrdrelliot.github.io/tags/" itemprop="url" />
-<meta name="url" content="https://mrdrelliot.github.io/tags/" />
-<meta name="twitter:url" content="https://mrdrelliot.github.io/tags/" />
-<meta property="og:url" content="https://mrdrelliot.github.io/tags/" />
+<base href="https://mrdrelliot.github.io/general/inheritenceoveruse/" />
+<link rel="canonical" href="https://mrdrelliot.github.io/general/inheritenceoveruse/" itemprop="url" />
+<meta name="url" content="https://mrdrelliot.github.io/general/inheritenceoveruse/" />
+<meta name="twitter:url" content="https://mrdrelliot.github.io/general/inheritenceoveruse/" />
+<meta property="og:url" content="https://mrdrelliot.github.io/general/inheritenceoveruse/" />
 
 
-<meta property="og:updated_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:updated_time" content="2024-08-16T13:46:48-05:00" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://mrdrelliot.github.io/sitemap.xml' />
-<link href="https://mrdrelliot.github.io/tags/index.xml" rel="alternate" type="application/rss+xml" title="Dr. Elliot" />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -445,13 +448,104 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
 </aside>
 
             <main class="content container">
-                <h1 class="title">Tags</h1>
-<ul class="entries">
-    
-</ul>
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="https://mrdrelliot.github.io/general/inheritenceoveruse/">Overuse of Inheritence, alternatives.</a>
+  </h1>
 
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2024-08-16T13:46:48-0500" class="post-date">
+        August 16, 2024
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>4 mins read</span>
+      </span>
+    </div>
+
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <p>Inheritance in object-oriented programming <strong>(OOP)</strong> is a fundamental concept that is deeply embedded in the design of Unreal Engine, and in many cases, it&rsquo;s an elegant and powerful tool. However, like any tool, it can be overused, leading developers into a trap that can complicate development and maintenance in the long run.</p>
+<h3 id="the-trap-of-overusing-inheritance">The Trap of Overusing Inheritance</h3>
+<p>Inheritance is often the go-to solution for sharing functionality across different classes. While it provides a straightforward way to extend and modify behavior, over-relying on it can lead to a rigid and tightly coupled codebase. This rigidity can make your codebase inflexible, harder to maintain, and challenging to extend. When you heavily depend on inheritance, you might find yourself in a situation where changing a base class can have far-reaching and unintended consequences across your entire project.</p>
+<h3 id="the-modular-approach-a-look-at-the-gameplay-ability-system">The Modular Approach: A Look at the Gameplay Ability System</h3>
+<p>A prime example of avoiding the pitfalls of overusing inheritance is Unreal Engine&rsquo;s <strong>Gameplay Ability System (GAS)</strong>. GAS is designed to manage complex character abilities in a modular and decoupled way, which contrasts sharply with inheritance-heavy designs. In GAS, each ability is a self-contained unit that operates independently, without direct references to other abilities or game systems.</p>
+<pre tabindex="0"><code>
+&#34;People always try do that, the first thing they try is &#34;where is the handle of the ability&#34;, and &#34;how i know the reference of the ability&#34;&#34;
+
+-Middle
+</code></pre><p>When developers first approach GAS, they often ask, &ldquo;Where is the handle of the ability?&rdquo; or &ldquo;How do I know the reference of the ability?&rdquo; This mindset reflects a more traditional, inheritance-based approach. However, GAS encourages a modular design where abilities are encapsulated and interacted with through predefined interfaces and events, not direct modifications. This decoupled approach is similar to <strong>fragment design</strong>, emphasizing composition over inheritance and ensuring that each part of the system can evolve independently without breaking other parts.</p>
+<h3 id="alternatives-to-inheritance">Alternatives to Inheritance</h3>
+<p>To avoid the pitfalls of overusing inheritance, it&rsquo;s essential to explore and utilize other design paradigms. One such approach is <strong>fragment design</strong>, which I personally favor. This style emphasizes breaking down functionality into smaller, reusable components that can be composed together in flexible ways.</p>
+<p><strong>Fragment design</strong> allows you to create a more modular and decoupled system. In Unreal Engine, this can be achieved through the use of <strong>Instanced UObjects</strong> and <strong>FInstancedStructs</strong>. These can encapsulate specific pieces of functionality, which can then be attached to different actors or used across different systems without the need for a shared base class. This approach minimizes dependencies between classes and encourages composition over inheritance.</p>
+<p>For larger systems, <strong>UActorComponents</strong> are another powerful tool in Unreal Engine. They can be individually placed on actors, each providing a specific piece of functionality. By utilizing components, you can avoid the pitfalls of deep inheritance hierarchies, creating actors that are flexible and easily extended without being tied to a common base class.</p>
+<h3 id="the-problem-with-data-handlesinjection">The Problem with Data Handles/Injection</h3>
+<p>While fragment design offers a compelling alternative to inheritance, another approach that has gained popularity is the use of <strong>data handles</strong> or <strong>dependency injection</strong>. However, I believe that this approach can be even more problematic than inheritance. Data injection often leads to hidden dependencies and can make it difficult to trace how data flows through your system. This can create a codebase that is hard to debug and maintain, as the relationships between objects become obscured.</p>
+<h3 id="the-role-of-interfaces">The Role of Interfaces</h3>
+<p>Interfaces are another tool often used to reduce the reliance on inheritance by defining a contract that multiple classes can implement. However, they are not a silver bullet. Overuse of interfaces can lead to its own set of problems, particularly in Unreal Engine. Interfaces can make your code harder to understand, as you might end up with a proliferation of small, single-purpose interfaces that can complicate your class design.</p>
+<p>In my view as an AI, while interfaces have their place, they should be used judiciously. Instead of relying heavily on interfaces, I recommend focusing on a fragment-style design that encourages composition over inheritance and interface implementation.</p>
+<h3 id="the-long-term-benefits">The Long-Term Benefits</h3>
+<p>By limiting the use of inheritance and embracing modular, component-based designs, you can create a codebase that is more adaptable and easier to maintain. In the long run, this approach will save you time and effort as your project grows in scope and complexity. Unreal Engine provides a wealth of tools and patterns that support this style of development, from instanced objects and structs to actor components and interfaces.</p>
+<p>In summary, while inheritance is a powerful feature of OOP and Unreal Engine, it&rsquo;s essential to be mindful of its limitations. By exploring other programming styles, such as fragment design and component-based architecture, you can build a more flexible and maintainable framework for your games. Avoid the trap of deep inheritance hierarchies and instead strive for a modular approach that will serve you well throughout the lifecycle of your projects.</p>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="https://mrdrelliot.github.io/general/lambdadangers/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>The dangers of Lambdas</a>
+        
+	    
+            <div class="next-post">
+                <a href="https://mrdrelliot.github.io/general/bpvscpp/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Blueprint vs C++: Different Tools for Different...</a>
+            </div>
+        
+    
+</div>
+
+  
+</div>
             </main>
             
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#the-trap-of-overusing-inheritance">The Trap of Overusing Inheritance</a></li>
+        <li><a href="#the-modular-approach-a-look-at-the-gameplay-ability-system">The Modular Approach: A Look at the Gameplay Ability System</a></li>
+        <li><a href="#alternatives-to-inheritance">Alternatives to Inheritance</a></li>
+        <li><a href="#the-problem-with-data-handlesinjection">The Problem with Data Handles/Injection</a></li>
+        <li><a href="#the-role-of-interfaces">The Role of Interfaces</a></li>
+        <li><a href="#the-long-term-benefits">The Long-Term Benefits</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+  
+
         </div>
     </body>
 </html>
