@@ -59,11 +59,11 @@
 
 <!-- Open Graph image and Twitter Card metadata -->
 
-<title itemprop="name">Dr. Elliot - Intro</title>
-<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;Intro />
-<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;Intro />
-<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;Intro />
-<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;Intro />
+<title itemprop="name">Dr. Elliot - About Lumina</title>
+<meta property="og:title" content=Dr.&#32;Elliot&#32;-&#32;About&#32;Lumina />
+<meta name="twitter:title" content=Dr.&#32;Elliot&#32;-&#32;About&#32;Lumina />
+<meta itemprop="name" content=Dr.&#32;Elliot&#32;-&#32;About&#32;Lumina />
+<meta name="application-name" content=Dr.&#32;Elliot&#32;-&#32;About&#32;Lumina />
 <meta property="og:site_name" content="Dr. Elliot" />
 
 
@@ -73,14 +73,14 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="https://dr-elliot.com/intro/intro/" />
-<link rel="canonical" href="https://dr-elliot.com/intro/intro/" itemprop="url" />
-<meta name="url" content="https://dr-elliot.com/intro/intro/" />
-<meta name="twitter:url" content="https://dr-elliot.com/intro/intro/" />
-<meta property="og:url" content="https://dr-elliot.com/intro/intro/" />
+<base href="https://dr-elliot.com/lumina/lumina/" />
+<link rel="canonical" href="https://dr-elliot.com/lumina/lumina/" itemprop="url" />
+<meta name="url" content="https://dr-elliot.com/lumina/lumina/" />
+<meta name="twitter:url" content="https://dr-elliot.com/lumina/lumina/" />
+<meta property="og:url" content="https://dr-elliot.com/lumina/lumina/" />
 
 
-<meta property="og:updated_time" content="2024-08-16T10:28:54-05:00" />
+<meta property="og:updated_time" content="2025-09-23T12:28:45-05:00" />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://dr-elliot.com/sitemap.xml' />
@@ -622,15 +622,15 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
                 <div class="post">
   <div class="info">
   <h1 class="post-title">
-    <a href="https://dr-elliot.com/intro/intro/">Intro</a>
+    <a href="https://dr-elliot.com/lumina/lumina/">About Lumina</a>
   </h1>
 
   <div class="headline">
     <div>
       
       
-      <time datetime=" 2024-08-16T10:28:54-0500" class="post-date">
-        August 16, 2024
+      <time datetime=" 2025-09-23T12:28:45-0500" class="post-date">
+        September 23, 2025
       </time>
       
       <span> - </span>
@@ -639,7 +639,7 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
           
         
 
-        <span>0 min read</span>
+        <span>2 mins read</span>
       </span>
     </div>
 
@@ -652,7 +652,54 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
   
 </div>
 
-  
+  <h1 id="lumina-game-engine">Lumina Game Engine</h1>
+<p>Lumina is my ongoing game engine project written in C++. I’ve been working on it for about two years, and what started as a side experiment has turned into one of my biggest passions.</p>
+<p>Originally, I was more interested in game development itself, making projects, prototypes, and ideas come to life. But over time, I found that what really grabbed me wasn’t the <em>games</em> — it was the <em>engines</em> behind them. Building the tools, systems, and architecture became far more rewarding than just shipping another game.</p>
+<p>So Lumina was born.</p>
+<hr>
+<h2 id="from-scratch-and-rewritten-again">From Scratch (and Rewritten Again)</h2>
+<p>Like many, I began with inspiration from <a href="https://www.youtube.com/@TheCherno" target="_blank">TheCherno’s engine series</a>. The first version of Lumina followed a similar structure, but eventually, I realized it wasn’t what I wanted.</p>
+<p>I scrapped it and rebuilt the engine from the ground up, a painful but freeing process. That rewrite gave Lumina its current direction: a cleaner, more modular design that prioritizes learning, experimentation, and modern engine features.</p>
+<hr>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li>
+<p><strong>C++ Reflection System</strong><br>
+Built using Libclang, enabling runtime type information, serialization, and editor integration.</p>
+</li>
+<li>
+<p><strong>Fully integrated Vulkan renderer</strong><br>
+The renderer is one of the largest parts of any game engine, and I chose to invest my time in Vulkan.</p>
+</li>
+<li>
+<p><strong>Custom Editor</strong><br>
+Developed with ImGui, providing real-time control, debugging tools, and extensibility.</p>
+</li>
+<li>
+<p><strong>Entity-Component System (ECS)</strong><br>
+A dedicated focus on ECS, designed not only for performance but also for clarity. ECS is often treated like magic, Lumina’s goal is to demystify it, making it practical and approachable.</p>
+</li>
+<li>
+<p><strong>Tools &amp; Extensibility</strong><br>
+From asset management to rendering abstractions, Lumina is gradually expanding into a full-fledged toolkit for engine developers and hobbyists alike.</p>
+</li>
+</ul>
+<hr>
+<h2 id="philosophy">Philosophy</h2>
+<p>Lumina isn’t just about being another engine, it’s about <strong>learning, transparency, and accessibility</strong>. Game engine development can feel intimidating, but the project aims to make concepts like ECS, reflection, and rendering pipelines easier to understand.</p>
+<p>I’m building it to be:</p>
+<ul>
+<li><strong>Open Source</strong> — available for anyone to study, fork, and use.</li>
+<li><strong>Freely Licensed</strong> — no paywalls or closed-off features.</li>
+<li><strong>Collaborative</strong> — pull requests and contributions are welcome.</li>
+</ul>
+<hr>
+<h2 id="get-involved">Get Involved</h2>
+<p>The project is open source and actively evolving. If you’re curious about engine internals, or if you want to contribute, check it out:</p>
+<p><a href="https://github.com/MrDrElliot/LuminaEngine" target="_blank">Lumina on GitHub</a></p>
+<hr>
+<p><em>Building games is fun, but building the tools that make them possible is where the real magic is.</em></p>
+
   
   <hr>
 <div class="footer">
@@ -670,7 +717,14 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
     <div class="article-toc ">
     <div class="toc-wrapper">
       <h4 id="contents"></h4>
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#from-scratch-and-rewritten-again">From Scratch (and Rewritten Again)</a></li>
+    <li><a href="#key-features">Key Features</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#get-involved">Get Involved</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
