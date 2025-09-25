@@ -5,61 +5,70 @@
     <loc>https://www.dr-elliot.com/</loc>
     <lastmod>2025-09-23T12:34:23-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/</loc>
+    <loc>https://www.dr-elliot.com/posts/</loc>
     <lastmod>2025-09-23T12:34:23-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/answering/</loc>
+    <loc>https://www.dr-elliot.com/posts/general/answering/</loc>
     <lastmod>2025-09-23T12:34:23-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/lumina/lumina/</loc>
+    <loc>https://www.dr-elliot.com/tags/gameengine/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/lumina/</loc>
     <lastmod>2025-09-23T12:28:45-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/lumina/</loc>
     <lastmod>2025-09-23T12:28:45-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/vtable/</loc>
+    <loc>https://www.dr-elliot.com/lumina/lumina/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/lumina/lumina/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/rendering/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/vulkan/</loc>
+    <lastmod>2025-09-23T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/general/vtable/</loc>
     <lastmod>2025-03-27T12:34:23-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/memory/</loc>
+    <loc>https://www.dr-elliot.com/posts/memory/movesemantics/</loc>
     <lastmod>2024-09-29T12:28:45-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/memory/movesemantics/</loc>
-    <lastmod>2024-09-29T12:28:45-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/optimization/</loc>
+    <loc>https://www.dr-elliot.com/posts/optimization/thecastscare/</loc>
     <lastmod>2024-09-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/optimization/thecastscare/</loc>
-    <lastmod>2024-09-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/memory/tarrayallocators/</loc>
+    <loc>https://www.dr-elliot.com/posts/memory/tarrayallocators/</loc>
     <lastmod>2024-08-16T14:31:08-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/memory/templateobjecttypes/</loc>
+    <loc>https://www.dr-elliot.com/posts/memory/templateobjecttypes/</loc>
     <lastmod>2024-08-16T14:31:08-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/memory/softreferences/</loc>
+    <loc>https://www.dr-elliot.com/posts/memory/softreferences/</loc>
     <lastmod>2024-08-16T14:31:08-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/bpvscpp/</loc>
+    <loc>https://www.dr-elliot.com/posts/general/bpvscpp/</loc>
     <lastmod>2024-08-16T13:46:48-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/constexpr/</loc>
+    <loc>https://www.dr-elliot.com/posts/general/constexpr/</loc>
     <lastmod>2024-08-16T13:46:48-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/inheritenceoveruse/</loc>
+    <loc>https://www.dr-elliot.com/posts/general/inheritenceoveruse/</loc>
     <lastmod>2024-08-16T13:46:48-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/general/lambdadangers/</loc>
+    <loc>https://www.dr-elliot.com/posts/general/lambdadangers/</loc>
     <lastmod>2024-08-16T13:46:48-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/gas/</loc>
+    <loc>https://www.dr-elliot.com/posts/gas/intro/</loc>
     <lastmod>2024-08-16T12:29:09-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/gas/intro/</loc>
-    <lastmod>2024-08-16T12:29:09-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/memory/buffers/</loc>
+    <loc>https://www.dr-elliot.com/posts/memory/buffers/</loc>
     <lastmod>2024-08-16T12:28:45-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/about/</loc>
@@ -68,20 +77,17 @@
     <loc>https://www.dr-elliot.com/about/aboutme/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/intro/</loc>
+    <loc>https://www.dr-elliot.com/posts/about/aboutme/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/intro/intro/</loc>
+    <loc>https://www.dr-elliot.com/posts/intro/intro/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/networking/networkserialization/</loc>
-    <lastmod>2024-08-16T10:28:54-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/networking/</loc>
+    <loc>https://www.dr-elliot.com/posts/networking/networkserialization/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/series/</loc>
   </url><url>
-    <loc>https://www.dr-elliot.com/tags/</loc>
+    <loc>https://www.dr-elliot.com/topics/</loc>
   </url>
 </urlset>
