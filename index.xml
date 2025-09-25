@@ -9,11 +9,11 @@
     <lastBuildDate>Tue, 23 Sep 2025 12:34:23 -0500</lastBuildDate>
     <atom:link href="https://www.dr-elliot.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Stop Being a Condescending Asshole in Programming Communities</title>
+      <title>Stop Being a Condescending Asshole</title>
       <link>https://www.dr-elliot.com/posts/general/answering/</link>
       <pubDate>Tue, 23 Sep 2025 12:34:23 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/general/answering/</guid>
-      <description>Stop Being a Condescending Asshole in Programming Communities We’ve all been there:&#xA;Q: &amp;ldquo;Hey, I’m running into an issue with X, has anyone seen this before?&amp;rdquo;&#xA;A: &amp;ldquo;Why would you even do that? That’s wrong.&amp;rdquo;&#xA;And just like that, a genuine question gets slapped down with arrogance instead of help.&#xA;This happens constantly in programming Discords, and other communities. The attitude usually comes from the same place: ego. For some people, programming isn’t just problem-solving, it’s a stage for flexing intelligence at the expense of others.</description>
+      <description>We’ve all been there:&#xA;Q: &amp;ldquo;Hey, I’m running into an issue with X, has anyone seen this before?&amp;rdquo;&#xA;A: &amp;ldquo;Why would you even do that? That’s wrong.&amp;rdquo;&#xA;And just like that, a genuine question gets slapped down with arrogance instead of help.&#xA;This happens constantly in programming Discords, and other communities. The attitude usually comes from the same place: ego. For some people, programming isn’t just problem-solving, it’s a stage for flexing intelligence at the expense of others.</description>
     </item>
     <item>
       <title>Lumina Game Engine</title>
@@ -28,6 +28,13 @@
       <pubDate>Thu, 27 Mar 2025 12:34:23 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/general/vtable/</guid>
       <description>Fun with V-Tables! Have you ever wanted to access a function, but you couldn&amp;rsquo;t because the function is private? :/ Have you wanted to replace a function in a class? Well, look no further! Today we&amp;rsquo;re going to be talking about V-Table manipulation.&#xA;Please note, this is purely for fun and can be dangerous to do in production environments. I don&amp;rsquo;t recommend using it for actual runtime use, but it can be an interesting exercise in how memory manipulation works and how you can use it to your advantage.</description>
+    </item>
+    <item>
+      <title>Search</title>
+      <link>https://www.dr-elliot.com/search/</link>
+      <pubDate>Mon, 24 Mar 2025 23:00:00 -0300</pubDate>
+      <guid>https://www.dr-elliot.com/search/</guid>
+      <description>Search It&amp;#39;s necessary to enable Javascript&#xA;Loading...</description>
     </item>
     <item>
       <title>Move Semantics</title>
@@ -65,7 +72,7 @@
       <description>What Are Soft References? Soft references are a way to reference an object in Unreal Engine without forcing it to stay in memory. This can be incredibly useful in scenarios where you need to reference assets like textures, sounds, or even entire levels, but don’t want to load them into memory until absolutely necessary.&#xA;Why Use Soft References? Imagine your game has a massive library of assets. Loading everything at once would quickly consume your memory, leading to performance issues or, worse, crashing your game.</description>
     </item>
     <item>
-      <title>Blueprint vs C&#43;&#43;: Different Tools for Different Jobs</title>
+      <title>Blueprint vs C&#43;&#43;</title>
       <link>https://www.dr-elliot.com/posts/general/bpvscpp/</link>
       <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/general/bpvscpp/</guid>
@@ -79,7 +86,7 @@
       <description>Simple way to possibly increase some performance. This blog is a follow-up to this YouTube video: https://www.youtube.com/watch?v=8-VZoXn8f9U&#xA;Consider the following code:&#xA;// ConstexprExample.cpp : This file contains the &amp;#39;main&amp;#39; function. Program execution begins and ends there. // #include &amp;lt;iostream&amp;gt; #include &amp;lt;chrono&amp;gt; int Fibonacci(int n) { if (n &amp;lt;= 1) return n; return Fibonacci(n - 1) + Fibonacci(n - 2); } constexpr int Fibonacci_C(int n) { if (n &amp;lt;= 1) return n; return Fibonacci_C(n - 1) + Fibonacci_C(n - 2); } int main() { auto Start = std::chrono::high_resolution_clock::now(); constexpr int num = 25; constexpr int result_c = Fibonacci_C(num); std::cout &amp;lt;&amp;lt; &amp;#34;Constexpr Fibonacci: &amp;#34; &amp;lt;&amp;lt; result_c &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; std::cout &amp;lt;&amp;lt; &amp;#34;Time Taken: &amp;#34; &amp;lt;&amp;lt; std::chrono::duration_cast&amp;lt;std::chrono::microseconds&amp;gt;(std::chrono::high_resolution_clock::now() - Start).</description>
     </item>
     <item>
-      <title>Overuse of Inheritence, alternatives.</title>
+      <title>Overuse of Inheritence.</title>
       <link>https://www.dr-elliot.com/posts/general/inheritenceoveruse/</link>
       <pubDate>Fri, 16 Aug 2024 13:46:48 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/general/inheritenceoveruse/</guid>
@@ -93,7 +100,7 @@
       <description>Using Lambdas in Unreal can be dangerous! Lambdas, or anonymous functions, in Unreal Engine can be very useful for writing concise and flexible code. However, they come with certain dangers, particularly when dealing with the lifetime of objects and capturing variables by reference. Here’s why:&#xA;1. Capturing by Reference and Object Lifetimes When you use lambdas in Unreal Engine, you might capture variables by reference, which is common for avoiding unnecessary copying.</description>
     </item>
     <item>
-      <title>Intro</title>
+      <title>Intro to GAS</title>
       <link>https://www.dr-elliot.com/posts/gas/intro/</link>
       <pubDate>Fri, 16 Aug 2024 12:29:09 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/gas/intro/</guid>
@@ -104,21 +111,14 @@
       <link>https://www.dr-elliot.com/posts/memory/buffers/</link>
       <pubDate>Fri, 16 Aug 2024 12:28:45 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/memory/buffers/</guid>
-      <description>In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.&#xA;Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&amp;lt;std::byte&amp;gt; buffer:&#xA;#include &amp;lt;vector&amp;gt; #include &amp;lt;cstdint&amp;gt; #include &amp;lt;cstring&amp;gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&amp;lt;std::byte&amp;gt; buffer; // Example data std::vector&amp;lt;uint32_t&amp;gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.</description>
+      <description>Buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.&#xA;Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&amp;lt;std::byte&amp;gt; buffer:&#xA;#include &amp;lt;vector&amp;gt; #include &amp;lt;cstdint&amp;gt; #include &amp;lt;cstring&amp;gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&amp;lt;std::byte&amp;gt; buffer; // Example data std::vector&amp;lt;uint32_t&amp;gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.</description>
     </item>
     <item>
       <title>About Me</title>
       <link>https://www.dr-elliot.com/about/aboutme/</link>
       <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
       <guid>https://www.dr-elliot.com/about/aboutme/</guid>
-      <description>About Me Hello, and welcome to my blog!&#xA;I’m a self-taught programmer with a deep curiosity for how things work under the hood. Most of my time these days is spent on Lumina, my custom C++ game engine, a long-term project that combines my love for systems programming, graphics, and engine architecture.&#xA;Before Lumina, I released several projects built (or been apart of) with Unreal Engine, which you can find on Steam (In order of release):</description>
-    </item>
-    <item>
-      <title>Intro</title>
-      <link>https://www.dr-elliot.com/posts/intro/intro/</link>
-      <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/posts/intro/intro/</guid>
-      <description></description>
+      <description>About Me Hello, and welcome to my blog!&#xA;I’m a self-taught programmer with a deep curiosity for how things work under the hood. Most of my time these days is spent on Lumina, my custom C++ game engine, a long-term project combining my love for systems programming, graphics, and engine architecture.&#xA;By day, I’m an airline pilot, though I prefer to keep that part of my life private. If you’d like to reach out or ask questions about programming or game development, feel free to connect on Discord.</description>
     </item>
     <item>
       <title>Network Serialization</title>

@@ -8,7 +8,7 @@
 <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://www.dr-elliot.com/posts/memory/buffers/">
   <meta property="og:site_name" content="Dr. Elliot">
   <meta property="og:title" content="Working With Buffers">
-  <meta property="og:description" content="In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.
+  <meta property="og:description" content="Buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.
 Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&lt;std::byte&gt; buffer:
 #include &lt;vector&gt; #include &lt;cstdint&gt; #include &lt;cstring&gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&lt;std::byte&gt; buffer; // Example data std::vector&lt;uint32_t&gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.">
   <meta property="og:locale" content="en_us">
@@ -16,10 +16,13 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-08-16T12:28:45-05:00">
     <meta property="article:modified_time" content="2024-08-16T12:28:45-05:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="UnrealEngine">
+    <meta property="article:tag" content="CPP">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Working With Buffers">
-  <meta name="twitter:description" content="In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.
+  <meta name="twitter:description" content="Buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.
 Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&lt;std::byte&gt; buffer:
 #include &lt;vector&gt; #include &lt;cstdint&gt; #include &lt;cstring&gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&lt;std::byte&gt; buffer; // Example data std::vector&lt;uint32_t&gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.">
 
@@ -49,11 +52,11 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
       >Posts</a>
     </div>
     <div class="nav-item">
-      <a
+      <a href="/lumina/lumina/"
       >Lumina</a>
     </div>
     <div class="nav-item">
-      <a
+      <a href="/about/aboutme/"
       >About</a>
     </div>
 </div>
@@ -68,11 +71,11 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
       >Posts</a>
     </div>
     <div class="nav-item">
-      <a
+      <a href="/lumina/lumina/"
       >Lumina</a>
     </div>
     <div class="nav-item">
-      <a
+      <a href="/about/aboutme/"
       >About</a>
     </div>
 </div>
@@ -107,8 +110,14 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
     </li>
     <span>&nbsp»&nbsp</span>
 </ol>
-<h1>Working With Buffers</h1><time class="dim" datetime="2024-08-16T12:28:45-05:00">August 16, 2024</time></div>
-  <section class="page-section"><p>In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.</p>
+<h1>Working With Buffers</h1><time class="dim" datetime="2024-08-16T12:28:45-05:00">August 16, 2024</time><div class="term-container"><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/c&#43;&#43;/">#C&#43;&#43;</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/unrealengine/">#UnrealEngine</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/cpp/">#CPP</a>
+      </div></ol></div>
+  <section class="page-section"><p>Buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.</p>
 <h2 id="raw-c-buffer-management">Raw C++ Buffer Management</h2>
 <p>In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several <code>uint32_t</code> values into a <code>std::vector&lt;std::byte&gt;</code> buffer:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
@@ -193,7 +202,7 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
 </div>
 </footer>
       </div><aside id="side-pane" class="side-sticky"><div class="side-details">
-    <span>417 words</span>
+    <span>414 words</span>
     <span>3 - 3 minutes read</span></div><h3>Table Of Contents</h3><nav id="TableOfContents">
   <ul>
     <li><a href="#raw-c-buffer-management">Raw C++ Buffer Management</a></li>
@@ -206,7 +215,8 @@ Raw C&#43;&#43; Buffer Management In raw C&#43;&#43;, managing buffers and packi
     </li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
-</nav></aside></div>
+</nav><h3>Related</h3>
+    <ul><li><a href="/posts/networking/networkserialization/">Network Serialization</a></li></ul></aside></div>
   </div>
 </body>
 </html>
