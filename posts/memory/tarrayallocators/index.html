@@ -109,6 +109,7 @@ I personally highly recommend taking a look at the VoxelCore library that’s op
 <h1>TArray Allocators</h1><time class="dim" datetime="2024-08-16T14:31:08-05:00">August 16, 2024</time><div class="term-container"><div class="tag">
         <a href="https://www.dr-elliot.com/tags/unrealengine/">#UnrealEngine</a>
       </div></ol></div>
+
   <section class="page-section"><h1 id="understanding-tarray-allocators-in-unreal-engine">Understanding TArray Allocators in Unreal Engine</h1>
 <hr>
 <p>Unreal Engine&rsquo;s <code>TArray</code> is a powerful and flexible container that allows you to manage dynamic arrays in your code. One of its lesser-known yet incredibly useful features is the ability to specify custom allocators. These allocators determine how the memory for the array is allocated and managed, which can have a significant impact on performance, especially in memory-constrained environments.</p>
@@ -146,7 +147,18 @@ I personally highly recommend taking a look at the VoxelCore library that’s op
 <h3 id="conclusion">Conclusion</h3>
 <p>Choosing the right allocator for your <code>TArray</code> can have a significant impact on your game&rsquo;s performance and memory usage. The default allocator is a good general-purpose choice, but when you need more control—whether to avoid heap allocations, limit memory usage, or meet specific performance criteria—inline, fixed, heap, or custom allocators can provide the solution.</p>
 <p>Understanding these allocators and how to use them effectively can help you write more efficient, optimized code in Unreal Engine. Whether you&rsquo;re working on a small mobile game or a large AAA title, these tools give you the flexibility to manage memory in a way that best suits your project&rsquo;s needs.</p>
-</section></main>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
         <footer id="main-footer"><div class="footer">
   <a href="#">Scroll to Top</a>
   <div class="footer-copyright">

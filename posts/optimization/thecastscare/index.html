@@ -113,6 +113,7 @@
       </div><div class="tag">
         <a href="https://www.dr-elliot.com/tags/optimization/">#Optimization</a>
       </div></ol></div>
+
   <section class="page-section"><p>Hello! Today I wanted to talk a little bit about casting, primarily Blueprint casting. The main reason I wanted to bring this up is because it&rsquo;s one of the most misunderstood and blown-out-of-proportion concepts in Unreal Engine. There&rsquo;s no shortage of YouTube videos with clickbait titles like &ldquo;<em>Casting is so bad, NEVER use it in your games!</em>&rdquo; (or some variation of that). This highlights a larger problem: people creating tutorials when they have no business doing so. But I digress.</p>
 <h2 id="so-what-is-casting">So what is casting?</h2>
 <p>Casting is simply a way of converting one object type into another in Unreal Engine. In Blueprint, this is often done to access or interact with specific properties or methods on an object. For example, you might cast to a <code>PlayerCharacter</code> to access health or inventory functions from a generic object reference.</p>
@@ -146,7 +147,18 @@ The <em>Other Actor</em> pin produces an actor reference. You can use *<em>Get C
 <p>But that’s a discussion for another day.</p>
 <hr>
 <p>In conclusion, casting has gotten a bad reputation because of misinformation. It&rsquo;s not inherently bad, nor is it expensive at runtime. The real issue lies in how casting can lead to hard references, especially when combined with asset-heavy classes. By understanding how casting works, and how to minimize hard references, you&rsquo;ll be in a much better position to use it efficiently in your projects.</p>
-</section></main>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
         <footer id="main-footer"><div class="footer">
   <a href="#">Scroll to Top</a>
   <div class="footer-copyright">

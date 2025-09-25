@@ -115,6 +115,7 @@ Move semantics involve efficiently transferring ownership of resources (like mem
       </div><div class="tag">
         <a href="https://www.dr-elliot.com/tags/optimization/">#Optimization</a>
       </div></ol></div>
+
   <section class="page-section"><p>Hello! Today, I want to talk about a commonly misunderstood concept in programming: <strong>Move Semantics</strong>.</p>
 <p>Move semantics involve efficiently transferring ownership of resources (like memory) from one object to another, instead of copying the data, which adds unnecessary overhead. This is especially important in performance-critical applications such as <strong>game development</strong>, where proper memory management can make a big difference in efficiency. Games, just like any other software, are prone to performance pitfalls caused by poor handling of move semantics. By the end of this post, you should have a better grasp of how to avoid these inefficiencies.</p>
 <p>We’ll cover the basics of <strong>lvalue</strong> and <strong>rvalue</strong>, explore move semantics in C++ and Unreal Engine, and show real-world examples in both <strong>raw C++</strong> and <strong>Unreal Engine’s C++</strong>.</p>
@@ -453,7 +454,18 @@ Moves: 0
 </ol>
 <p>Mastering these techniques will help you write more efficient code in any game development environment!</p>
 <p>Thanks for reading! Hopefully, you now have a better understanding of move semantics and how to apply them in both raw C++ and Unreal Engine.</p>
-</section></main>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
         <footer id="main-footer"><div class="footer">
   <a href="#">Scroll to Top</a>
   <div class="footer-copyright">
