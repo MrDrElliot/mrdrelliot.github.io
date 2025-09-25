@@ -16,13 +16,6 @@
       <description>Stop Being a Condescending Asshole in Programming Communities We’ve all been there:&#xA;Q: &amp;ldquo;Hey, I’m running into an issue with X, has anyone seen this before?&amp;rdquo;&#xA;A: &amp;ldquo;Why would you even do that? That’s wrong.&amp;rdquo;&#xA;And just like that, a genuine question gets slapped down with arrogance instead of help.&#xA;This happens constantly in programming Discords, and other communities. The attitude usually comes from the same place: ego. For some people, programming isn’t just problem-solving, it’s a stage for flexing intelligence at the expense of others.</description>
     </item>
     <item>
-      <title>Lumina Game Engine</title>
-      <link>https://www.dr-elliot.com/posts/lumina/lumina/</link>
-      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/posts/lumina/lumina/</guid>
-      <description>Lumina is my ongoing game engine project written in C++. I’ve been working on it for about two years, and what started as a side experiment has turned into one of my biggest passions.&#xA;Originally, I was more interested in game development itself, making projects, prototypes, and ideas come to life. But over time, I found that what really grabbed me wasn’t the games — it was the engines behind them.</description>
-    </item>
-    <item>
       <title>Fun with V-Tables</title>
       <link>https://www.dr-elliot.com/posts/general/vtable/</link>
       <pubDate>Thu, 27 Mar 2025 12:34:23 -0500</pubDate>
@@ -105,13 +98,6 @@
       <pubDate>Fri, 16 Aug 2024 12:28:45 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/memory/buffers/</guid>
       <description>In Unreal Engine, buffers are simply containers of bytes that can store raw data using memory offsets. Understanding how to effectively manage these buffers is essential for tasks like serialization, deserialization, and data storage.&#xA;Raw C++ Buffer Management In raw C++, managing buffers and packing data requires manual handling of memory offsets. For example, consider the following code that packs several uint32_t values into a std::vector&amp;lt;std::byte&amp;gt; buffer:&#xA;#include &amp;lt;vector&amp;gt; #include &amp;lt;cstdint&amp;gt; #include &amp;lt;cstring&amp;gt; // For std::memcpy void PackData() { // Buffer to hold the packed data std::vector&amp;lt;std::byte&amp;gt; buffer; // Example data std::vector&amp;lt;uint32_t&amp;gt; data = { 1234, 5678, 91011 }; // Calculate the total size needed for the buffer size_t totalSize = data.</description>
-    </item>
-    <item>
-      <title>About Me</title>
-      <link>https://www.dr-elliot.com/posts/about/aboutme/</link>
-      <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/posts/about/aboutme/</guid>
-      <description>About Me Hello, and welcome to my blog!&#xA;I’m a self-taught programmer with a deep curiosity for how things work under the hood. Most of my time these days is spent on Lumina, my custom C++ game engine, a long-term project combining my love for systems programming, graphics, and engine architecture.&#xA;By day, I’m an airline pilot, though I prefer to keep that part of my life private. If you’d like to reach out or ask questions about programming or game development, feel free to connect on Discord.</description>
     </item>
     <item>
       <title>Intro</title>
