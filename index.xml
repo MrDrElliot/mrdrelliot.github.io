@@ -41,7 +41,14 @@
       <link>https://www.dr-elliot.com/lumina/lumina/</link>
       <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
       <guid>https://www.dr-elliot.com/lumina/lumina/</guid>
-      <description>Lumina is my ongoing game engine project written in C++. I’ve been working on it for about two years, and what started as a side experiment has turned into one of my biggest passions.&#xA;Originally, I was more interested in game development itself, making projects, prototypes, and ideas come to life. But over time, I found that what really grabbed me wasn’t the games — it was the engines behind them.</description>
+      <description>Lumina is my ongoing game engine project written in C++. I’ve been working on it for about two years, and what started as a side experiment has turned into one of my biggest passions.&#xA;Originally, I was more interested in game development itself, making projects, prototypes, and ideas come to life. But over time, I found that what really grabbed me wasn’t the games, it was the engines behind them. Building the tools, systems, and architecture became far more rewarding than just shipping another game.</description>
+    </item>
+    <item>
+      <title>Lumina&#39;s Vulkan Memory Management</title>
+      <link>https://www.dr-elliot.com/lumina/vulkanmemoryallocations/</link>
+      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/lumina/vulkanmemoryallocations/</guid>
+      <description>Deep Dive: Memory Management in Lumina Engine When building a Vulkan renderer, one of the most deceptively complex challenges isn&amp;rsquo;t the graphics pipeline or shader compilation—it&amp;rsquo;s memory management. Raw Vulkan gives you complete control over GPU memory, but with that power comes significant responsibility. Today, I want to share how Lumina handles this through the Vulkan Memory Allocator (VMA) library and why it&amp;rsquo;s been a game-changer for our engine.&#xA;The Problem with Raw Vulkan Memory Let me paint a picture of what memory management looks like without VMA.</description>
     </item>
     <item>
       <title>Fun with V-Tables</title>
