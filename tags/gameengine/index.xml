@@ -13,7 +13,7 @@
       <link>https://www.dr-elliot.com/lumina/vulkanmemoryallocations/</link>
       <pubDate>Tue, 14 Oct 2025 12:28:45 -0500</pubDate>
       <guid>https://www.dr-elliot.com/lumina/vulkanmemoryallocations/</guid>
-      <description>Deep Dive: Memory Management in Lumina Engine When building a Vulkan renderer, one of the most deceptively complex challenges isn&amp;rsquo;t the graphics pipeline or shader compilation—it&amp;rsquo;s memory management. Raw Vulkan gives you complete control over GPU memory, but with that power comes significant responsibility. Today, I want to share how Lumina handles this through the Vulkan Memory Allocator (VMA) library and why it&amp;rsquo;s been a game-changer for our engine.&#xA;The Problem with Raw Vulkan Memory Let me paint a picture of what memory management looks like without VMA.</description>
+      <description>Deep Dive: Memory Management in Lumina Engine When building a Vulkan renderer, one of the most deceptively complex challenges isn&amp;rsquo;t the graphics pipeline or shader compilation, it&amp;rsquo;s memory management. Raw Vulkan gives you complete control over GPU memory, but with that power comes significant responsibility. Today, I want to share how Lumina handles this through the Vulkan Memory Allocator (VMA) library and why it&amp;rsquo;s been a game-changer for our engine.</description>
     </item>
     <item>
       <title>Lumina Game Engine</title>
