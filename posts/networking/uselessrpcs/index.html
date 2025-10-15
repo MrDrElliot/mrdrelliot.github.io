@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Use less RPCs | Dr. Elliot</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://www.dr-elliot.com/posts/networking/uselessrpcs/">
+  <meta property="og:site_name" content="Dr. Elliot">
+  <meta property="og:title" content="Use less RPCs">
+  <meta property="og:description" content="Hello, I wanted to talk about a rather opinionated topic.
+I think RPCs get over-used. RPCs (Remote-Procedure-Calls) are a way of executing a procedure on a remote instance. For example, Server -&gt; Client | Client -&gt; Server.
+Here’s where I think a problem arises, it’s very very easy in Unreal to end up writing a copious amount of RPCs scattered all over the place through your code-base. I dislike this for a number of reasons.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-15T10:28:54-05:00">
+    <meta property="article:modified_time" content="2024-10-15T10:28:54-05:00">
+    <meta property="article:tag" content="UnrealEngine">
+    <meta property="article:tag" content="Networking">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Use less RPCs">
+  <meta name="twitter:description" content="Hello, I wanted to talk about a rather opinionated topic.
+I think RPCs get over-used. RPCs (Remote-Procedure-Calls) are a way of executing a procedure on a remote instance. For example, Server -&gt; Client | Client -&gt; Server.
+Here’s where I think a problem arises, it’s very very easy in Unreal to end up writing a copious amount of RPCs scattered all over the place through your code-base. I dislike this for a number of reasons.">
+
+      <link rel="stylesheet" href="/css/root.min.0e732b812b9751962e01a7c4798a1211cd5f8ac8abec7f99793fe306989e459f.css" integrity="sha256-DnMrgSuXUZYuAafEeYoSEc1fisir7H&#43;ZeT/jBpieRZ8=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.59eb1a059f8cd558e64375ede3e68d3e9120ddb0c6bdbab555c247689cef59e1.css" integrity="sha256-WesaBZ&#43;M1VjmQ3Xt4&#43;aNPpEg3bDGvbq1VcJHaJzvWeE=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.5e0de3b335e5c523c7cf45473dc43fccb6c75f64a9d59cc04a6eccbb7c25eb49.js" integrity="sha256-Xg3jszXlxSPHz0VHPcQ/zLbHX2Sp1ZzASm7Mu3wl60k="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://www.dr-elliot.com/" style="color: inherit;">Dr. Elliot</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/posts/">
+        <span itemprop="name">Posts</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Use less RPCs</h1><time class="dim" datetime="2024-10-15T10:28:54-05:00">October 15, 2024</time><div class="term-container"><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/unrealengine/">#UnrealEngine</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/networking/">#Networking</a>
+      </div></ol></div>
+
+  <section class="page-section"><p>Hello, I wanted to talk about a rather opinionated topic.</p>
+<p>I think RPCs get over-used. RPCs (Remote-Procedure-Calls) are a way of executing a procedure on a remote instance. For example, Server -&gt; Client | Client -&gt; Server.</p>
+<p>Here&rsquo;s where I think a problem arises, it&rsquo;s very very easy in Unreal to end up writing a copious amount of RPCs scattered all over the place through your code-base. I dislike this for a number of reasons.</p>
+<p>1.) Debugging becomes a nightmare
+2.) More RPCs that must get processed.
+3.) More chance for data to not reach the intended destination (unreliable rpcs).</p>
+<p>What&rsquo;s an answer I recommend? <em>use less RPCs</em>.</p>
+<p>There are so many times when a bunch of RPCs could be moved to contain just 1 or 2.</p>
+<p>I have an inventory system which processes transactions, the entire inventory control (moving, swapping, add, remove, etc) is combined into one single RPC called a transaction. These transactions can be batched, compressed, and can hold custom serialization thanks to Unreal&rsquo;s struct system and the NetSerializer struct trait.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This blog post assumes default UE networking, without Iris or any other custom features. It may become outdated very soon.</p>
+<h2 id="the-technical-case-for-rpc-consolidation">The Technical Case for RPC Consolidation</h2>
+<p>Let me be clear upfront: this is purely my opinion based on years of working with Unreal&rsquo;s networking stack. Other engineers may have perfectly valid reasons for preferring a more distributed RPC architecture, and I respect that. However, I&rsquo;ve found that consolidating RPCs into command-pattern structures yields measurably better results in terms of maintainability, performance, and debuggability.</p>
+<h3 id="the-hidden-cost-of-rpc-proliferation">The Hidden Cost of RPC Proliferation</h3>
+<p>When you declare an RPC in Unreal, you&rsquo;re not just creating a simple function call. Under the hood, Unreal&rsquo;s networking system must:</p>
+<ol>
+<li><strong>Register the RPC in the function name table</strong> - Each RPC gets assigned a function index that must be synchronized between client and server</li>
+<li><strong>Serialize parameters individually</strong> - Each parameter goes through Unreal&rsquo;s reflection system for serialization</li>
+<li><strong>Queue the RPC in the outgoing bunch</strong> - RPCs get bundled into packets, but each RPC has overhead in the bunch header</li>
+<li><strong>Process reliability and ordering semantics</strong> - Even for unreliable RPCs, the system must track and manage the call</li>
+<li><strong>Invoke the RPC on the receiving end</strong> - Which involves reflection lookup and parameter deserialization</li>
+</ol>
+<p>Now multiply this by dozens or hundreds of scattered RPCs firing every frame. Each one adds to your replication overhead, not just in bandwidth, but in CPU cycles spent on serialization, bunch management, and function dispatch.</p>
+<h3 id="the-problem-with-semantic-granularity">The Problem with Semantic Granularity</h3>
+<p>Consider a typical item pickup flow that I&rsquo;ve seen in many codebases:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>UFUNCTION(Server, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ServerRequestPickup(AActor<span style="color:#f92672">*</span> Item);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(Client, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ClientConfirmPickup(int32 ItemID);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(Server, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ServerAddToInventory(int32 ItemID, int32 Slot);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(Client, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ClientUpdateInventoryUI(int32 Slot, FItemData ItemData);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(NetMulticast, Unreliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> MulticastPlayPickupEffect(AActor<span style="color:#f92672">*</span> Item);
+</span></span></code></pre></div><p>This seems logical at first glance, each RPC has a clear, single responsibility. But look at what&rsquo;s actually happening:</p>
+<ul>
+<li><strong>5 separate network messages</strong> for a single logical operation</li>
+<li><strong>5 separate reliability channels</strong> to manage (reliable RPCs use the reliable buffer, which can cause head-of-line blocking)</li>
+<li><strong>No transactional semantics</strong> - if ClientConfirmPickup arrives but ServerAddToInventory gets dropped on a bad connection, you have partial state</li>
+<li><strong>Debugging requires tracing through 5 different call sites</strong> across potentially different classes</li>
+</ul>
+<h3 id="the-command-pattern-approach">The Command Pattern Approach</h3>
+<p>Instead, consider consolidating this into a single transactional RPC:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>USTRUCT()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FInventoryTransaction</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GENERATED_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    ETransactionType Type;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    int32 SourceSlot;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    int32 DestSlot;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    FGuid ItemGuid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    TArray<span style="color:#f92672">&lt;</span>uint8<span style="color:#f92672">&gt;</span> CustomPayload;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Custom NetSerializer for optimal packing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">NetSerialize</span>(FArchive<span style="color:#f92672">&amp;</span> Ar, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPackageMap</span><span style="color:#f92672">*</span> Map, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&amp;</span> bOutSuccess);
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TStructOpsTypeTraits</span><span style="color:#f92672">&lt;</span>FInventoryTransaction<span style="color:#f92672">&gt;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TStructOpsTypeTraitsBase2<span style="color:#f92672">&lt;</span>FInventoryTransaction<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">enum</span> { WithNetSerializer <span style="color:#f92672">=</span> true };
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(Server, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ServerProcessTransaction(<span style="color:#66d9ef">const</span> FInventoryTransaction<span style="color:#f92672">&amp;</span> Transaction);
+</span></span></code></pre></div><p>Now you have:</p>
+<ul>
+<li><strong>One network message</strong> for the entire logical operation</li>
+<li><strong>One reliability channel</strong> to manage</li>
+<li><strong>Transactional semantics</strong> - either the entire transaction succeeds or fails atomically</li>
+<li><strong>One debug breakpoint</strong> to set to trace all inventory operations</li>
+<li><strong>Batching potential</strong> - you can extend this to <code>TArray&lt;FInventoryTransaction&gt;</code> to batch multiple operations in a single RPC</li>
+</ul>
+<h3 id="bandwidth-and-serialization-efficiency">Bandwidth and Serialization Efficiency</h3>
+<p>Here&rsquo;s something non-obvious: custom NetSerializers can be <em>significantly</em> more efficient than default replication. When you use standard UPROPERTY replication or basic RPC parameters, Unreal&rsquo;s serialization is generic and safe, but not optimized for your specific data.</p>
+<p>With a custom NetSerializer on your transaction struct, you can:</p>
+<ul>
+<li><strong>Pack bit-flags tightly</strong> - Use <code>Ar.SerializeBits()</code> to pack enums and bools into minimal bits</li>
+<li><strong>Quantize floats</strong> - Serialize positions/rotations with controlled precision using <code>Ar.SerializeInt()</code> with custom ranges</li>
+<li><strong>Delta compress</strong> - Serialize only what changed since the last transaction</li>
+<li><strong>Use custom compression</strong> - Apply domain-specific compression to your payload data</li>
+</ul>
+<h3 id="the-reliability-problem">The Reliability Problem</h3>
+<p>Unreliable RPCs are often used for &ldquo;unimportant&rdquo; events like cosmetic effects. But here&rsquo;s the issue: when you have 20 different unreliable RPCs being called from various systems, you have no holistic view of packet priority or importance.</p>
+<p>With a consolidated approach, you can implement sophisticated prioritization:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>USTRUCT()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FGameplayEventBatch</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GENERATED_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// High priority events sent reliably
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    TArray<span style="color:#f92672">&lt;</span>FGameplayEvent<span style="color:#f92672">&gt;</span> CriticalEvents;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Lower priority events sent unreliably, can be dropped
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    TArray<span style="color:#f92672">&lt;</span>FGameplayEvent<span style="color:#f92672">&gt;</span> CosmeticEvents;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Spatially-partitioned events only relevant to nearby clients
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    TArray<span style="color:#f92672">&lt;</span>FGameplayEvent<span style="color:#f92672">&gt;</span> ProximityEvents;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This gives you fine-grained control over what gets reliable delivery and what can be safely dropped under packet loss, all within a single RPC structure.</p>
+<h3 id="debugging-and-observability">Debugging and Observability</h3>
+<p>When debugging network issues, scattered RPCs are a nightmare. You need to:</p>
+<ul>
+<li>Set breakpoints in multiple locations</li>
+<li>Enable RPC logging for specific functions (<code>.LogNetTraffic</code>, <code>.LogNetPlayerMovement</code>, etc.)</li>
+<li>Trace through multiple callstacks</li>
+<li>Hope you can reproduce the issue consistently</li>
+</ul>
+<p>With consolidated RPCs, you have:</p>
+<ul>
+<li><strong>Single choke point</strong> - One function to set a breakpoint in</li>
+<li><strong>Centralized logging</strong> - One place to log all transactions with full context</li>
+<li><strong>Replay support</strong> - Easy to record and replay transactions for debugging</li>
+<li><strong>Metrics collection</strong> - Simple to instrument and track transaction patterns</li>
+</ul>
+<h3 id="state-synchronization-guarantees">State Synchronization Guarantees</h3>
+<p>Scattered RPCs make it nearly impossible to reason about state synchronization. Consider this scenario:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Called in quick succession
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ServerSetHealth(<span style="color:#ae81ff">50.0f</span>);
+</span></span><span style="display:flex;"><span>ServerSetArmor(<span style="color:#ae81ff">25.0f</span>);
+</span></span><span style="display:flex;"><span>ServerSetAmmo(<span style="color:#ae81ff">10</span>);
+</span></span></code></pre></div><p>On a poor connection with packet loss, you might receive them out of order, or only receive 2 out of 3. Your client state is now inconsistent, and you have no way (or a very difficult time) to detect or recover from this.</p>
+<p>With a consolidated state update RPC:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>USTRUCT()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FPlayerStateUpdate</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GENERATED_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    uint32 TransactionID; <span style="color:#75715e">// Monotonically increasing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> Health;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Armor;
+</span></span><span style="display:flex;"><span>    int32 Ammo;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... other state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UFUNCTION(Server, Reliable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ServerUpdatePlayerState(<span style="color:#66d9ef">const</span> FPlayerStateUpdate<span style="color:#f92672">&amp;</span> Update);
+</span></span></code></pre></div><p>Now you have:</p>
+<ul>
+<li><strong>Ordering guarantees</strong> - You can detect out-of-order updates via TransactionID</li>
+<li><strong>Atomic updates</strong> - All state changes arrive together or not at all</li>
+<li><strong>Easy rollback</strong> - If an update fails validation, you can reject the entire transaction</li>
+</ul>
+<h3 id="the-actor-channel-bunch-budget">The Actor Channel Bunch Budget</h3>
+<p>Here&rsquo;s a technical detail many developers miss: Unreal&rsquo;s Actor Channels have a limited bunch size. When you replicate properties and fire RPCs, they all get packed into bunches for that actor.</p>
+<p>If you have many small RPCs, you&rsquo;re fragmenting your bunch space inefficiently. Each RPC has overhead:</p>
+<ul>
+<li>Function name index (2 bytes typically)</li>
+<li>Parameter headers</li>
+<li>Bunch control bits</li>
+</ul>
+<p>With consolidated RPCs using tightly-packed structs, you maximize your bunch utilization. You can fit more meaningful data in each packet, reducing the number of packets needed per frame.</p>
+<h3 id="performance-considerations-function-dispatch-overhead">Performance Considerations: Function Dispatch Overhead</h3>
+<p>Every RPC invocation requires:</p>
+<ol>
+<li><strong>Function lookup</strong> in the UFunction map (hash table lookup)</li>
+<li><strong>Reflection system invocation</strong> to deserialize parameters</li>
+<li><strong>Virtual function dispatch</strong> to call the actual implementation</li>
+</ol>
+<p>When you have hundreds of RPCs being fired per second across multiple actors, this overhead accumulates. By consolidating to fewer RPC entry points, you:</p>
+<ul>
+<li>Reduce hash table lookups</li>
+<li>Amortize reflection overhead across batched operations</li>
+</ul>
+<h3 id="counterarguments-and-trade-offs">Counterarguments and Trade-offs</h3>
+<p>I want to be fair here - this approach isn&rsquo;t perfect and has trade-offs:</p>
+<ol>
+<li>
+<p>A command-pattern system is more complex upfront. You need to design your transaction structures carefully, implement custom serialization, and handle different transaction types in a single function.</p>
+</li>
+<li>
+<p>With scattered RPCs, you get type safety from C++ function signatures. With a consolidated approach, you&rsquo;re often switching on enums and casting payloads, which is more error-prone.</p>
+</li>
+<li>
+<p>New developers on your project can more easily understand individual RPCs like <code>ServerFireWeapon()</code> than a generic <code>ServerProcessGameplayCommand()</code> that handles 50 different command types.</p>
+</li>
+</ol>
+<h3 id="when-to-use-which-approach">When to Use Which Approach</h3>
+<p>Based on my experience, here&rsquo;s when I use each approach:</p>
+<p><strong>Consolidated RPCs for:</strong></p>
+<ul>
+<li>High-frequency operations (input, inventory, ability systems)</li>
+<li>Operations that need transactional semantics</li>
+<li>Systems with many related operations</li>
+<li>Performance-critical replication</li>
+</ul>
+<p><strong>Individual RPCs for:</strong></p>
+<ul>
+<li>One-off events (level transitions, login/logout)</li>
+<li>Very simple operations with no related state</li>
+<li>Prototyping and early development</li>
+<li>When integrating with third-party code that expects individual RPCs</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This is admittedly an opinionated stance, and I don&rsquo;t claim it&rsquo;s the only valid approach. Some teams prefer the clarity and simplicity of individual RPCs, and that&rsquo;s perfectly legitimate.</p>
+<p>However, I&rsquo;ve found that as projects scale, more systems, more players, more network traffic, the consolidated RPC approach pays dividends in debuggability, performance, and maintainability. The upfront investment in designing clean transaction structures and serialization has consistently saved me time in the long run.</p>
+<p>If you&rsquo;re working on a networked Unreal project, I&rsquo;d encourage you to at least experiment with this approach in one of your core systems. You might find, as I did, that the benefits far outweigh the initial complexity cost.</p>
+<p>As with all architectural decisions, measure, profile, and make informed choices based on your specific project requirements. What works for a 100-player battle royale might not work for a 4-player co-op game, and vice versa.</p>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">Scroll to Top</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2025 Dr. Elliot</div>
+    <div>Made with ❤️ and powered by <a href="https://github.com/math-queiroz/rusty-typewriter" target="_blank">Rusty Typewriter</a> theme for <a href="https://gohugo.io/" target="_blank">Hugo</a></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky"><div class="side-details">
+    <span>1561 words</span>
+    <span>10 - 13 minutes read</span></div><h3>Table Of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#disclaimer">Disclaimer</a></li>
+    <li><a href="#the-technical-case-for-rpc-consolidation">The Technical Case for RPC Consolidation</a>
+      <ul>
+        <li><a href="#the-hidden-cost-of-rpc-proliferation">The Hidden Cost of RPC Proliferation</a></li>
+        <li><a href="#the-problem-with-semantic-granularity">The Problem with Semantic Granularity</a></li>
+        <li><a href="#the-command-pattern-approach">The Command Pattern Approach</a></li>
+        <li><a href="#bandwidth-and-serialization-efficiency">Bandwidth and Serialization Efficiency</a></li>
+        <li><a href="#the-reliability-problem">The Reliability Problem</a></li>
+        <li><a href="#debugging-and-observability">Debugging and Observability</a></li>
+        <li><a href="#state-synchronization-guarantees">State Synchronization Guarantees</a></li>
+        <li><a href="#the-actor-channel-bunch-budget">The Actor Channel Bunch Budget</a></li>
+        <li><a href="#performance-considerations-function-dispatch-overhead">Performance Considerations: Function Dispatch Overhead</a></li>
+        <li><a href="#counterarguments-and-trade-offs">Counterarguments and Trade-offs</a></li>
+        <li><a href="#when-to-use-which-approach">When to Use Which Approach</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h3>Related</h3>
+    <ul><li><a href="/posts/networking/networkserialization/">Network Serialization</a></li><li><a href="/posts/optimization/thecastscare/">The Cast Scare</a></li><li><a href="/posts/memory/tarrayallocators/">TArray Allocators</a></li><li><a href="/posts/memory/templateobjecttypes/">Templated Object Types</a></li><li><a href="/posts/memory/softreferences/">What Are Soft References?</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

@@ -68,6 +68,15 @@
     <loc>https://www.dr-elliot.com/search/</loc>
     <lastmod>2025-03-24T23:00:00-03:00</lastmod>
   </url><url>
+    <loc>https://www.dr-elliot.com/tags/networking/</loc>
+    <lastmod>2024-10-15T10:28:54-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/unrealengine/</loc>
+    <lastmod>2024-10-15T10:28:54-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/networking/uselessrpcs/</loc>
+    <lastmod>2024-10-15T10:28:54-05:00</lastmod>
+  </url><url>
     <loc>https://www.dr-elliot.com/archive/</loc>
     <lastmod>2024-09-29T12:28:45-05:00</lastmod>
   </url><url>
@@ -78,9 +87,6 @@
     <lastmod>2024-09-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/optimization/thecastscare/</loc>
-    <lastmod>2024-09-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/tags/unrealengine/</loc>
     <lastmod>2024-09-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/memory/tarrayallocators/</loc>
@@ -123,9 +129,6 @@
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/networking/networkserialization/</loc>
-    <lastmod>2024-08-16T10:28:54-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/tags/networking/</loc>
     <lastmod>2024-08-16T10:28:54-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/series/</loc>

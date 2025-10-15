@@ -44,6 +44,13 @@
       <description>Fun with V-Tables! Have you ever wanted to access a function, but you couldn&amp;rsquo;t because the function is private? :/ Have you wanted to replace a function in a class? Well, look no further! Today we&amp;rsquo;re going to be talking about V-Table manipulation.&#xA;Please note, this is purely for fun and can be dangerous to do in production environments. I don&amp;rsquo;t recommend using it for actual runtime use, but it can be an interesting exercise in how memory manipulation works and how you can use it to your advantage.</description>
     </item>
     <item>
+      <title>Use less RPCs</title>
+      <link>https://www.dr-elliot.com/posts/networking/uselessrpcs/</link>
+      <pubDate>Tue, 15 Oct 2024 10:28:54 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/posts/networking/uselessrpcs/</guid>
+      <description>Hello, I wanted to talk about a rather opinionated topic.&#xA;I think RPCs get over-used. RPCs (Remote-Procedure-Calls) are a way of executing a procedure on a remote instance. For example, Server -&amp;gt; Client | Client -&amp;gt; Server.&#xA;Here&amp;rsquo;s where I think a problem arises, it&amp;rsquo;s very very easy in Unreal to end up writing a copious amount of RPCs scattered all over the place through your code-base. I dislike this for a number of reasons.</description>
+    </item>
+    <item>
       <title>The Cast Scare</title>
       <link>https://www.dr-elliot.com/posts/optimization/thecastscare/</link>
       <pubDate>Fri, 06 Sep 2024 00:00:00 +0000</pubDate>
