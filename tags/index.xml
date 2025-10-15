@@ -6,8 +6,36 @@
     <description>Recent content in Tags on Dr. Elliot</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Oct 2025 12:34:23 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 14 Oct 2025 12:28:45 -0500</lastBuildDate>
     <atom:link href="https://www.dr-elliot.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GameEngine</title>
+      <link>https://www.dr-elliot.com/tags/gameengine/</link>
+      <pubDate>Tue, 14 Oct 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/tags/gameengine/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lumina</title>
+      <link>https://www.dr-elliot.com/tags/lumina/</link>
+      <pubDate>Tue, 14 Oct 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/tags/lumina/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rendering</title>
+      <link>https://www.dr-elliot.com/tags/rendering/</link>
+      <pubDate>Tue, 14 Oct 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/tags/rendering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vulkan</title>
+      <link>https://www.dr-elliot.com/tags/vulkan/</link>
+      <pubDate>Tue, 14 Oct 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/tags/vulkan/</guid>
+      <description></description>
+    </item>
     <item>
       <title>LifeLessons</title>
       <link>https://www.dr-elliot.com/tags/lifelessons/</link>
@@ -41,34 +69,6 @@
       <link>https://www.dr-elliot.com/tags/gamedevelopment/</link>
       <pubDate>Mon, 29 Sep 2025 12:34:23 -0500</pubDate>
       <guid>https://www.dr-elliot.com/tags/gamedevelopment/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>GameEngine</title>
-      <link>https://www.dr-elliot.com/tags/gameengine/</link>
-      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/tags/gameengine/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Lumina</title>
-      <link>https://www.dr-elliot.com/tags/lumina/</link>
-      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/tags/lumina/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Rendering</title>
-      <link>https://www.dr-elliot.com/tags/rendering/</link>
-      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/tags/rendering/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Vulkan</title>
-      <link>https://www.dr-elliot.com/tags/vulkan/</link>
-      <pubDate>Tue, 23 Sep 2025 12:28:45 -0500</pubDate>
-      <guid>https://www.dr-elliot.com/tags/vulkan/</guid>
       <description></description>
     </item>
     <item>
