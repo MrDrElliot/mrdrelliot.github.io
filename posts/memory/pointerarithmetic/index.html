@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide | Dr. Elliot</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://www.dr-elliot.com/posts/memory/pointerarithmetic/">
+  <meta property="og:site_name" content="Dr. Elliot">
+  <meta property="og:title" content="Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide">
+  <meta property="og:description" content="Pointer Arithmetic in C&#43;&#43;: Understanding the Fundamentals Pointer arithmetic is one of C&#43;&#43;’s most powerful low-level features, providing direct manipulation of memory addresses. While it can be dangerous when misused, understanding pointer arithmetic is essential for systems programming, implementing custom memory allocators, and writing performance-critical code.
+What is Pointer Arithmetic? Pointer arithmetic allows you to perform mathematical operations on pointers to traverse memory. Unlike regular integer arithmetic, pointer arithmetic is automatically scaled by the size of the type being pointed to.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-10-21T12:28:45-05:00">
+    <meta property="article:modified_time" content="2025-10-21T12:28:45-05:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="CPP">
+    <meta property="article:tag" content="Memory">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide">
+  <meta name="twitter:description" content="Pointer Arithmetic in C&#43;&#43;: Understanding the Fundamentals Pointer arithmetic is one of C&#43;&#43;’s most powerful low-level features, providing direct manipulation of memory addresses. While it can be dangerous when misused, understanding pointer arithmetic is essential for systems programming, implementing custom memory allocators, and writing performance-critical code.
+What is Pointer Arithmetic? Pointer arithmetic allows you to perform mathematical operations on pointers to traverse memory. Unlike regular integer arithmetic, pointer arithmetic is automatically scaled by the size of the type being pointed to.">
+
+      <link rel="stylesheet" href="/css/root.min.0e732b812b9751962e01a7c4798a1211cd5f8ac8abec7f99793fe306989e459f.css" integrity="sha256-DnMrgSuXUZYuAafEeYoSEc1fisir7H&#43;ZeT/jBpieRZ8=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.59eb1a059f8cd558e64375ede3e68d3e9120ddb0c6bdbab555c247689cef59e1.css" integrity="sha256-WesaBZ&#43;M1VjmQ3Xt4&#43;aNPpEg3bDGvbq1VcJHaJzvWeE=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.5e0de3b335e5c523c7cf45473dc43fccb6c75f64a9d59cc04a6eccbb7c25eb49.js" integrity="sha256-Xg3jszXlxSPHz0VHPcQ/zLbHX2Sp1ZzASm7Mu3wl60k="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://www.dr-elliot.com/" style="color: inherit;">Dr. Elliot</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/posts/">
+        <span itemprop="name">Posts</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide</h1><time class="dim" datetime="2025-10-21T12:28:45-05:00">October 21, 2025</time><div class="term-container"><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/c&#43;&#43;/">#C&#43;&#43;</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/cpp/">#CPP</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/memory/">#Memory</a>
+      </div></ol></div>
+
+  <section class="page-section"><h1 id="pointer-arithmetic-in-c-understanding-the-fundamentals">Pointer Arithmetic in C++: Understanding the Fundamentals</h1>
+<p>Pointer arithmetic is one of C++&rsquo;s most powerful low-level features, providing direct manipulation of memory addresses. While it can be dangerous when misused, understanding pointer arithmetic is essential for systems programming, implementing custom memory allocators, and writing performance-critical code.</p>
+<h2 id="what-is-pointer-arithmetic">What is Pointer Arithmetic?</h2>
+<p>Pointer arithmetic allows you to perform mathematical operations on pointers to traverse memory. Unlike regular integer arithmetic, pointer arithmetic is automatically scaled by the size of the type being pointed to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> IntPointer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>IntPointer<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Advances by sizeof(int) bytes (typically 4 bytes)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span><span style="color:#f92672">*</span> DoublePointer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">double</span>[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>DoublePointer<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Advances by sizeof(double) bytes (typically 8 bytes)
+</span></span></span></code></pre></div><p>When you increment a pointer, it doesn&rsquo;t simply add 1 to the address, it advances by the size of one complete element. This automatic scaling makes array traversal intuitive and type-safe.</p>
+<h2 id="valid-pointer-arithmetic-operations">Valid Pointer Arithmetic Operations</h2>
+<p>C++ supports several operations on pointers:</p>
+<ul>
+<li><strong>Addition/Subtraction with integers</strong>: <code>Pointer + 5</code>, <code>Pointer - 3</code></li>
+<li><strong>Increment/Decrement</strong>: <code>Pointer++</code>, <code>--Pointer</code></li>
+<li><strong>Pointer differencing</strong>: <code>PointerA - PointerB</code> (yields number of elements between them)</li>
+<li><strong>Comparison</strong>: <code>PointerA &lt; PointerB</code>, <code>PointerA == PointerB</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> Array[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> Start <span style="color:#f92672">=</span> Array;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> End <span style="color:#f92672">=</span> Array <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Traverse the array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> Current <span style="color:#f92672">=</span> Start; Current <span style="color:#f92672">!=</span> End; <span style="color:#f92672">++</span>Current) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>Current <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Calculate array size
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>size_t ElementCount <span style="color:#f92672">=</span> End <span style="color:#f92672">-</span> Start;  <span style="color:#75715e">// Returns 10
+</span></span></span></code></pre></div><h2 id="the-void-pointer-problem">The Void Pointer Problem</h2>
+<p>A critical limitation to understand: <strong>pointer arithmetic is undefined for <code>void*</code> pointers</strong>. The compiler cannot perform arithmetic on <code>void*</code> because it doesn&rsquo;t know the size of the pointed-to object.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> VoidBuffer <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// VoidBuffer++;  // Error: invalid use of void expression!
+</span></span></span></code></pre></div><p>This is why you&rsquo;ll often see <code>void*</code> cast to <code>char*</code> or <code>unsigned char*</code> before any arithmetic operations are performed.</p>
+<h2 id="why-use-char-for-raw-memory-operations">Why Use char* for Raw Memory Operations?</h2>
+<p>When working with raw memory buffers, <code>unsigned char*</code> (or <code>char*</code>) is the standard choice for several important reasons:</p>
+<p><strong>1. Guaranteed Size</strong>: <code>sizeof(char)</code> is always exactly 1 byte by definition, giving you precise byte-level control.</p>
+<p><strong>2. Type Aliasing</strong>: The C++ standard allows <code>char*</code> to alias any object type, making it legal for inspecting the byte representation of any object.</p>
+<p><strong>3. Portability</strong>: Every platform supports byte-level access through <code>char*</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ZeroMemory</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> Buffer, size_t ByteCount) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> BytePointer <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(Buffer);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (size_t Index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; Index <span style="color:#f92672">&lt;</span> ByteCount; <span style="color:#f92672">++</span>Index)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        BytePointer[Index] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="using-word-sized-types-for-performance">Using Word-Sized Types for Performance</h2>
+<p>While <code>char*</code> provides byte-level control, operating systems and processors are optimized for word-aligned operations. A &ldquo;word&rdquo; is the natural data size for a processor, typically 4 bytes on 32-bit systems or 8 bytes on 64-bit systems.</p>
+<p>When you need to move large blocks of memory efficiently, using word-sized types like <code>size_t*</code> or <code>uint64_t*</code> can significantly improve performance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FastMemoryCopy</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> Dest, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> Source, size_t ByteCount) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Copy word-by-word for bulk of data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    size_t<span style="color:#f92672">*</span> DestWords <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">*&gt;</span>(Dest);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> size_t<span style="color:#f92672">*</span> SourceWords <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> size_t<span style="color:#f92672">*&gt;</span>(Source);
+</span></span><span style="display:flex;"><span>    size_t WordCount <span style="color:#f92672">=</span> ByteCount <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(size_t);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (size_t Index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; Index <span style="color:#f92672">&lt;</span> WordCount; <span style="color:#f92672">++</span>Index) 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        DestWords[Index] <span style="color:#f92672">=</span> SourceWords[Index];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Copy remaining bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    size_t BytesRemaining <span style="color:#f92672">=</span> ByteCount <span style="color:#f92672">%</span> <span style="color:#66d9ef">sizeof</span>(size_t);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (BytesRemaining <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> DestBytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(DestWords <span style="color:#f92672">+</span> WordCount);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> SourceBytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(SourceWords <span style="color:#f92672">+</span> WordCount);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (size_t Index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; Index <span style="color:#f92672">&lt;</span> BytesRemaining; <span style="color:#f92672">++</span>Index) 
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            DestBytes[Index] <span style="color:#f92672">=</span> SourceBytes[Index];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This approach leverages the processor&rsquo;s ability to move 4 or 8 bytes in a single instruction instead of copying byte-by-byte.</p>
+<h2 id="memory-alignment-matters">Memory Alignment Matters</h2>
+<p>Memory alignment is critical when using pointer arithmetic with word-sized types. Most processors require or strongly prefer that data be stored at addresses that are multiples of the data&rsquo;s size:</p>
+<ul>
+<li><code>int</code> (4 bytes) should be at addresses divisible by 4</li>
+<li><code>double</code> (8 bytes) should be at addresses divisible by 8</li>
+<li><code>size_t</code> (4 or 8 bytes) should be at addresses divisible by 4 or 8</li>
+</ul>
+<p>Accessing misaligned data can cause:</p>
+<ul>
+<li><strong>Significant performance penalties</strong> (multiple memory accesses required)</li>
+<li><strong>Hardware exceptions</strong> on some architectures (ARM, SPARC)</li>
+<li><strong>Undefined behavior</strong> according to the C++ standard</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">IsAligned</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> Pointer, size_t Alignment) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(Pointer) <span style="color:#f92672">%</span> Alignment) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Example: Ensure pointer is 8-byte aligned before treating as size_t*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">AlignPointer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> Pointer, size_t Alignment) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    uintptr_t Address <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>uintptr_t<span style="color:#f92672">&gt;</span>(Pointer);
+</span></span><span style="display:flex;"><span>    size_t Misalignment <span style="color:#f92672">=</span> Address <span style="color:#f92672">%</span> Alignment;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Misalignment <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        size_t Padding <span style="color:#f92672">=</span> Alignment <span style="color:#f92672">-</span> Misalignment;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(Pointer) <span style="color:#f92672">+</span> Padding;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Pointer;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is why you must be careful when casting between pointer types, ensure the address is properly aligned for the target type.</p>
+<h2 id="common-use-cases">Common Use Cases</h2>
+<p>Pointer arithmetic is essential in several domains:</p>
+<p><strong>Custom Memory Allocators</strong>: Games and real-time systems often use memory pools where pointer arithmetic manages allocation within a pre-allocated buffer.</p>
+<p><strong>Serialization</strong>: Converting data structures to byte streams for network transmission or file storage requires byte-level pointer manipulation.</p>
+<p><strong>Hardware Interfaces</strong>: Embedded systems use pointer arithmetic to access memory-mapped hardware registers at specific addresses.</p>
+<p><strong>Performance Optimization</strong>: High-performance libraries use pointer arithmetic to implement fast memory operations that outperform generic alternatives.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Simple example: traversing a buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ProcessBuffer</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> Buffer, size_t Length)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> Current <span style="color:#f92672">=</span> Buffer;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> End <span style="color:#f92672">=</span> Buffer <span style="color:#f92672">+</span> Length;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (Current <span style="color:#f92672">&lt;</span> End) 
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ProcessByte(<span style="color:#f92672">*</span>Current);
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">++</span>Current;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Understanding pointer arithmetic opens the door to low-level optimization and systems programming, but it requires careful attention to type sizes, alignment, and memory safety. When used correctly, it provides unmatched control over memory operations that higher-level abstractions cannot match.</p>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">Scroll to Top</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2025 Dr. Elliot</div>
+    <div>Made with ❤️ and powered by <a href="https://github.com/math-queiroz/rusty-typewriter" target="_blank">Rusty Typewriter</a> theme for <a href="https://gohugo.io/" target="_blank">Hugo</a></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky"><div class="side-details">
+    <span>910 words</span>
+    <span>6 - 8 minutes read</span></div><h3>Table Of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-pointer-arithmetic">What is Pointer Arithmetic?</a></li>
+    <li><a href="#valid-pointer-arithmetic-operations">Valid Pointer Arithmetic Operations</a></li>
+    <li><a href="#the-void-pointer-problem">The Void Pointer Problem</a></li>
+    <li><a href="#why-use-char-for-raw-memory-operations">Why Use char* for Raw Memory Operations?</a></li>
+    <li><a href="#using-word-sized-types-for-performance">Using Word-Sized Types for Performance</a></li>
+    <li><a href="#memory-alignment-matters">Memory Alignment Matters</a></li>
+    <li><a href="#common-use-cases">Common Use Cases</a></li>
+  </ul>
+</nav><h3>Related</h3>
+    <ul><li><a href="/posts/memory/movesemantics/">Move Semantics</a></li><li><a href="/posts/general/vtable/">Fun with V-Tables</a></li><li><a href="/archive/movesemantics_old/">Move Semantics</a></li><li><a href="/posts/memory/softreferences/">What Are Soft References?</a></li><li><a href="/posts/general/constexpr/">Constexpr and Consteval</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

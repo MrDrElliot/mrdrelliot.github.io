@@ -6,8 +6,15 @@
     <description>Recent content in C&#43;&#43; on Dr. Elliot</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Oct 2025 12:28:45 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 21 Oct 2025 12:28:45 -0500</lastBuildDate>
     <atom:link href="https://www.dr-elliot.com/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide</title>
+      <link>https://www.dr-elliot.com/posts/memory/pointerarithmetic/</link>
+      <pubDate>Tue, 21 Oct 2025 12:28:45 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/posts/memory/pointerarithmetic/</guid>
+      <description>Pointer Arithmetic in C++: Understanding the Fundamentals Pointer arithmetic is one of C++&amp;rsquo;s most powerful low-level features, providing direct manipulation of memory addresses. While it can be dangerous when misused, understanding pointer arithmetic is essential for systems programming, implementing custom memory allocators, and writing performance-critical code.&#xA;What is Pointer Arithmetic? Pointer arithmetic allows you to perform mathematical operations on pointers to traverse memory. Unlike regular integer arithmetic, pointer arithmetic is automatically scaled by the size of the type being pointed to.</description>
+    </item>
     <item>
       <title>Move Semantics</title>
       <link>https://www.dr-elliot.com/posts/memory/movesemantics/</link>

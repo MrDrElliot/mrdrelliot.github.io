@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.dr-elliot.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/cpp/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
     <loc>https://www.dr-elliot.com/</loc>
-    <lastmod>2025-10-14T12:28:45-05:00</lastmod>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/memory/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/memory/pointerarithmetic/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/</loc>
+    <lastmod>2025-10-21T12:28:45-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/gameengine/</loc>
     <lastmod>2025-10-14T12:28:45-05:00</lastmod>
@@ -20,9 +38,6 @@
     <loc>https://www.dr-elliot.com/tags/rendering/</loc>
     <lastmod>2025-10-14T12:28:45-05:00</lastmod>
   </url><url>
-    <loc>https://www.dr-elliot.com/tags/</loc>
-    <lastmod>2025-10-14T12:28:45-05:00</lastmod>
-  </url><url>
     <loc>https://www.dr-elliot.com/tags/vulkan/</loc>
     <lastmod>2025-10-14T12:28:45-05:00</lastmod>
   </url><url>
@@ -31,15 +46,6 @@
   </url><url>
     <loc>https://www.dr-elliot.com/tags/lifelessons/</loc>
     <lastmod>2025-10-11T12:34:23-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/posts/</loc>
-    <lastmod>2025-10-11T12:34:23-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/tags/c&#43;&#43;/</loc>
-    <lastmod>2025-10-11T12:28:45-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/tags/cpp/</loc>
-    <lastmod>2025-10-11T12:28:45-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/memory/movesemantics/</loc>
     <lastmod>2025-10-11T12:28:45-05:00</lastmod>
