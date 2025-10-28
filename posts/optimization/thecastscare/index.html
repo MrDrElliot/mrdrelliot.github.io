@@ -135,7 +135,7 @@
 </li>
 <li>
 <p>If you&rsquo;re working exclusively in Blueprint, <strong>keep your base classes free of any asset references</strong>. Avoid adding things like skeletal meshes, materials, or other large assets to the base class you&rsquo;re going to be casting to. This reduces the risk of inadvertently loading large assets unnecessarily.</p>
-<p>For example, if you cast to a <code>PlayerCharacter</code> class that has a skeletal mesh component attached to it, Unreal will load the mesh as soon as the class is referenced—even if you’re just trying to access a health variable. Avoid this by keeping base classes lightweight.</p>
+<p>For example, if you cast to a <code>PlayerCharacter</code> class that has a skeletal mesh component attached to it, Unreal will load the mesh as soon as the class is referenced, even if you’re just trying to access a health variable. Avoid this by keeping base classes lightweight.</p>
 </li>
 <li>
 <p>You can also get a lot of these things without needing to cast to your player at all. For example, the On Overlap delegate that you commonly use in your Blueprints to receive a callback when your actor/component overlaps with something&hellip;
@@ -168,7 +168,7 @@ The <em>Other Actor</em> pin produces an actor reference. You can use *<em>Get C
 </div>
 </footer>
       </div><aside id="side-pane" class="side-sticky"><div class="side-details">
-    <span>897 words</span>
+    <span>898 words</span>
     <span>5 - 6 minutes read</span></div><h3>Table Of Contents</h3><nav id="TableOfContents">
   <ul>
     <li><a href="#so-what-is-casting">So what is casting?</a></li>
@@ -178,7 +178,7 @@ The <em>Other Actor</em> pin produces an actor reference. You can use *<em>Get C
     <li><a href="#the-bigger-problem-hard-references">The Bigger Problem: Hard References</a></li>
   </ul>
 </nav><h3>Related</h3>
-    <ul><li><a href="/posts/memory/softreferences/">What Are Soft References?</a></li><li><a href="/posts/memory/tarrayallocators/">TArray Allocators</a></li><li><a href="/posts/memory/templateobjecttypes/">Templated Object Types</a></li><li><a href="/posts/general/bpvscpp/">Blueprint vs C&#43;&#43;</a></li><li><a href="/posts/general/constexpr/">Constexpr and Consteval</a></li></ul></aside></div>
+    <ul><li><a href="/posts/memory/tarrayallocators/">TArray Allocators</a></li><li><a href="/posts/general/bpvscpp/">Blueprint vs C&#43;&#43;</a></li><li><a href="/posts/general/constexpr/">Constexpr and Consteval</a></li><li><a href="/posts/general/inheritenceoveruse/">Overuse of Inheritence.</a></li><li><a href="/posts/memory/buffers/">Working With Buffers</a></li></ul></aside></div>
   </div>
 </body>
 </html>
