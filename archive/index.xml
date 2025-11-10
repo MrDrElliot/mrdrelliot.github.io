@@ -15,5 +15,12 @@
       <guid>https://www.dr-elliot.com/archive/movesemantics_old/</guid>
       <description>Hello! Today, I want to talk about a commonly misunderstood concept in programming: Move Semantics.&#xA;Move semantics involve efficiently transferring ownership of resources (like memory) from one object to another, instead of copying the data, which adds unnecessary overhead. This is especially important in performance-critical applications such as game development, where proper memory management can make a big difference in efficiency. Games, just like any other software, are prone to performance pitfalls caused by poor handling of move semantics.</description>
     </item>
+    <item>
+      <title>Network Serialization</title>
+      <link>https://www.dr-elliot.com/archive/networkserialization/</link>
+      <pubDate>Fri, 16 Aug 2024 10:28:54 -0500</pubDate>
+      <guid>https://www.dr-elliot.com/archive/networkserialization/</guid>
+      <description>Hello, I wanted to talk about some ways you can improve networking performance in C++ by understanding and implementing efficient network serialization in Unreal Engine. Effective serialization is critical for transmitting data across the network without unnecessary overhead, especially in multiplayer games where bandwidth is limited.&#xA;This article assumes basic familiarization with Unreal Engine&amp;rsquo;s networking system.&#xA;What is Network Serialization? Serialization in the context of networking refers to the process of converting data into a format that can be easily transmitted over a network and reconstructed later.</description>
+    </item>
   </channel>
 </rss>
