@@ -3,24 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.dr-elliot.com/tags/c&#43;&#43;/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/cpp/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/posts/general/polymorphism/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/programming/</loc>
-    <lastmod>2025-10-21T12:34:23-05:00</lastmod>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/general/unrealsceneproxies/</loc>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/</loc>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/tags/unrealengine/</loc>
+    <lastmod>2025-11-09T12:34:23-05:00</lastmod>
+  </url><url>
+    <loc>https://www.dr-elliot.com/posts/general/polymorphism/</loc>
     <lastmod>2025-10-21T12:34:23-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/memory/</loc>
@@ -78,9 +84,6 @@
     <lastmod>2025-03-24T23:00:00-03:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/tags/networking/</loc>
-    <lastmod>2024-10-15T10:28:54-05:00</lastmod>
-  </url><url>
-    <loc>https://www.dr-elliot.com/tags/unrealengine/</loc>
     <lastmod>2024-10-15T10:28:54-05:00</lastmod>
   </url><url>
     <loc>https://www.dr-elliot.com/posts/networking/uselessrpcs/</loc>

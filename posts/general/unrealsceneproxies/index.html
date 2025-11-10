@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scene Proxies in Unreal Engine | Dr. Elliot</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://www.dr-elliot.com/posts/general/unrealsceneproxies/">
+  <meta property="og:site_name" content="Dr. Elliot">
+  <meta property="og:title" content="Scene Proxies in Unreal Engine">
+  <meta property="og:description" content="One of the largest performance overheads in Unreal is the need for actors and primitive components to draw something in a world. Today I want to show you a way to bypass these abstractions entirely and manually draw primitives to the world with minimal overhead.
+Before we dive into the implementation, let’s talk about how the engine actually manages what’s being rendered in a UWorld. Spoiler: the UWorld isn’t really responsible for that at all.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-09T12:34:23-05:00">
+    <meta property="article:modified_time" content="2025-11-09T12:34:23-05:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="CPP">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="UnrealEngine">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Scene Proxies in Unreal Engine">
+  <meta name="twitter:description" content="One of the largest performance overheads in Unreal is the need for actors and primitive components to draw something in a world. Today I want to show you a way to bypass these abstractions entirely and manually draw primitives to the world with minimal overhead.
+Before we dive into the implementation, let’s talk about how the engine actually manages what’s being rendered in a UWorld. Spoiler: the UWorld isn’t really responsible for that at all.">
+
+      <link rel="stylesheet" href="/css/root.min.0e732b812b9751962e01a7c4798a1211cd5f8ac8abec7f99793fe306989e459f.css" integrity="sha256-DnMrgSuXUZYuAafEeYoSEc1fisir7H&#43;ZeT/jBpieRZ8=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.59eb1a059f8cd558e64375ede3e68d3e9120ddb0c6bdbab555c247689cef59e1.css" integrity="sha256-WesaBZ&#43;M1VjmQ3Xt4&#43;aNPpEg3bDGvbq1VcJHaJzvWeE=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.5e0de3b335e5c523c7cf45473dc43fccb6c75f64a9d59cc04a6eccbb7c25eb49.js" integrity="sha256-Xg3jszXlxSPHz0VHPcQ/zLbHX2Sp1ZzASm7Mu3wl60k="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://www.dr-elliot.com/" style="color: inherit;">Dr. Elliot</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >Posts</a>
+    </div>
+    <div class="nav-item">
+      <a href="/lumina/lumina/"
+      >Lumina</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/aboutme/"
+      >About</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://www.dr-elliot.com/posts/">
+        <span itemprop="name">Posts</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Scene Proxies in Unreal Engine</h1><time class="dim" datetime="2025-11-09T12:34:23-05:00">November 9, 2025</time><div class="term-container"><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/programming/">#Programming</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/cpp/">#CPP</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/c&#43;&#43;/">#C&#43;&#43;</a>
+      </div><div class="tag">
+        <a href="https://www.dr-elliot.com/tags/unrealengine/">#UnrealEngine</a>
+      </div></ol></div>
+
+  <section class="page-section"><p>One of the largest performance overheads in Unreal is the need for actors and primitive components to draw something in a world. Today I want to show you a way to bypass these abstractions entirely and manually draw primitives to the world with minimal overhead.</p>
+<p>Before we dive into the implementation, let&rsquo;s talk about how the engine actually manages what&rsquo;s being rendered in a UWorld. Spoiler: the UWorld isn&rsquo;t really responsible for that at all.</p>
+<h2 id="understanding-the-scene-architecture">Understanding the Scene Architecture</h2>
+<p>Inside the UWorld class, there&rsquo;s a property called <code>Scene</code>. If you&rsquo;ve worked with other graphical applications, this concept should be familiar, it&rsquo;s the common way to refer to a collection of primitives being sent to a renderer for drawing. Unreal manages these using what are called <strong>scene proxies</strong>, which act as the bridge between the game thread and the render thread.
+You can do this with any primitive type, however, the more complex the primitive, the more difficult it becomes.</p>
+<p>Today we&rsquo;ll be working with several core classes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FStaticMeshSceneProxyDesc
+</span></span><span style="display:flex;"><span>FStaticMeshSceneProxy
+</span></span><span style="display:flex;"><span>FPrimitiveSceneDesc
+</span></span><span style="display:flex;"><span>FPrimitiveSceneInfoData
+</span></span><span style="display:flex;"><span>FCustomPrimitiveData
+</span></span></code></pre></div><p>Let&rsquo;s break down each of these, because understanding their relationships is crucial to using them effectively.</p>
+<h3 id="fstaticmeshsceneproxydesc">FStaticMeshSceneProxyDesc</h3>
+<p>This struct inherits from <code>FPrimitiveSceneProxyDesc</code> and serves as a descriptor—essentially a data packet containing everything needed to create a scene proxy. It&rsquo;s a wrapper around the data you&rsquo;d typically expect your <code>UPrimitiveComponent</code> to have, tracking properties like whether the primitive casts shadows, whether it should render to the depth pass, the main pass, velocity pass, and so on. Think of it as a snapshot of all the rendering-relevant state at a specific moment in time.</p>
+<h3 id="fstaticmeshsceneproxy">FStaticMeshSceneProxy</h3>
+<p>As the comment in <code>PrimitiveSceneProxy.h</code> suggests, this proxy is a mirrored representation of a <code>UStaticMeshComponent</code>. Here&rsquo;s where things get interesting: Unreal tracks this resource <strong>on the render thread</strong>. It&rsquo;s the render thread&rsquo;s window into what the game thread wants to draw. This separation is fundamental to Unreal&rsquo;s architecture—the game thread prepares data, and the render thread consumes it asynchronously.</p>
+<p>The proxy contains all the mesh data, material references, LOD information, and rendering state needed to actually submit draw calls. It&rsquo;s designed to be read frequently by the render thread while being modified infrequently by the game thread.</p>
+<h3 id="fprimitivescenedesc">FPrimitiveSceneDesc</h3>
+<p>This is the descriptor used when adding or updating a primitive in the scene. It contains the transformation matrix, bounding volumes, the owner object reference, and a pointer to the <code>FPrimitiveSceneInfoData</code>. Essentially, it&rsquo;s the parameter struct for telling the scene &ldquo;here&rsquo;s a new thing to render&rdquo; or &ldquo;this thing moved.&rdquo;</p>
+<h3 id="fprimitivesceneinfodata">FPrimitiveSceneInfoData</h3>
+<p>This structure is the scene&rsquo;s internal representation of a primitive. It contains the actual <code>FPrimitiveSceneProxy</code> pointer, along with a unique <code>PrimitiveSceneId</code> that the scene uses to track this primitive in its internal data structures. This is what gets stored in the scene&rsquo;s arrays and spatial acceleration structures.</p>
+<h3 id="fcustomprimitivedata">FCustomPrimitiveData</h3>
+<p>This allows you to pass arbitrary float data to your materials. It&rsquo;s an array of floats (typically 4-byte aligned for GPU efficiency) that gets uploaded to the GPU and is accessible in materials through the <code>Custom Primitive Data</code> node. Very useful for per-instance variation without creating unique material instances.</p>
+<h2 id="the-performance-problem">The Performance Problem</h2>
+<p>One of the largest bottlenecks in the engine happens at the end of each frame, specifically in <code>UWorld::SendAllEndOfFrameUpdates()</code>. As the name suggests, at the end of the frame, the engine gathers any and all primitives that were marked dirty during that frame. &ldquo;Dirty&rdquo; can mean a lot of things: transform updates, material changes, mesh swaps, visibility changes, or any of a dozen other state modifications. This gets especially complex with sophisticated primitive components like Niagara particle systems.</p>
+<p>The main issue? This architecture <strong>completely prevents you from parallelizing transform updates</strong> on primitives. No matter how many threads you use to calculate new positions, they all get funneled through this single-threaded end-of-frame update on the game thread.</p>
+<p>Once the game thread finishes collecting these updates, they&rsquo;re sent to the <code>FScene</code> to be organized, sorted, and integrated into the scene&rsquo;s internal data structures. This happens in <code>FScene::UpdateAllPrimitiveSceneInfos()</code>, which then calls into the truly massive <code>FScene::Update()</code> function (lines 5175-6480 in <code>RenderScene.cpp</code> as of UE 5.6—yes, over 1,300 lines).</p>
+<p>This function handles:</p>
+<ul>
+<li>Updating primitive transforms and bounds</li>
+<li>Rebuilding spatial acceleration structures (octrees, etc.)</li>
+<li>Invalidating cached lighting and shadow data</li>
+<li>Updating Lumen scene representation</li>
+<li>Recalculating visibility states</li>
+<li>Updating GPU Scene data structures</li>
+<li>And much, much more&hellip;</li>
+</ul>
+<p>It&rsquo;s a critical function, but it&rsquo;s also a significant cost when you have hundreds or thousands of moving objects. So you may be asking: &ldquo;Elliot, why can&rsquo;t I just add the proxy to the scene myself and update its transform without the UWorld&rsquo;s involvement?&rdquo;
+Well, you&rsquo;re in luck. That&rsquo;s exactly what I&rsquo;m going to show you.</p>
+<h3 id="setting-up-the-data-structure">Setting Up the Data Structure</h3>
+<p>First, we need to create a structure to hold all our proxy-related data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FTestProxyData</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	FStaticMeshSceneProxyDesc ProxyDesc;
+</span></span><span style="display:flex;"><span>	FPrimitiveSceneDesc SceneDesc;
+</span></span><span style="display:flex;"><span>	FPrimitiveSceneInfoData SceneInfoData;
+</span></span><span style="display:flex;"><span>	FCustomPrimitiveData PrimitiveData;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>You&rsquo;ll need to add <code>RenderCore</code> to your module&rsquo;s <code>.Build.cs</code> file for this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>PublicDependencyModuleNames.AddRange(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">string</span>[] { 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Core&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;CoreUObject&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Engine&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;RenderCore&#34;</span>  <span style="color:#75715e">// ... </span>
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="adding-the-proxy-to-the-scene">Adding the Proxy to the Scene</h3>
+<p>Now, let&rsquo;s add this to the scene. For this example, we&rsquo;ll place an actor in our world with the necessary properties:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AYourActor<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Set up materials array - using TInlineAllocator to avoid heap allocation for single material
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	TArray<span style="color:#f92672">&lt;</span>TObjectPtr<span style="color:#f92672">&lt;</span>UMaterialInterface<span style="color:#f92672">&gt;</span>, TInlineAllocator<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;&gt;</span> Materials;
+</span></span><span style="display:flex;"><span>	Materials.Add(Material);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>	Data <span style="color:#f92672">=</span> MakeUnique<span style="color:#f92672">&lt;</span>FTestProxyData<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>PrimitiveData.Data <span style="color:#f92672">=</span> { <span style="color:#ae81ff">255.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.StaticMesh <span style="color:#f92672">=</span> Mesh;  <span style="color:#75715e">// Your UStaticMesh reference
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.CustomPrimitiveData <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>PrimitiveData;
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.NaniteResources <span style="color:#f92672">=</span> Mesh<span style="color:#f92672">-&gt;</span>GetRenderData()<span style="color:#f92672">-&gt;</span>NaniteResourcesPtr.Get();
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.Scene <span style="color:#f92672">=</span> GetWorld()<span style="color:#f92672">-&gt;</span>Scene;
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.Owner <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;  <span style="color:#75715e">// The actor owns this proxy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.ComponentId <span style="color:#f92672">=</span> Data<span style="color:#f92672">-&gt;</span>SceneInfoData.PrimitiveSceneId;
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>ProxyDesc.OverrideMaterials <span style="color:#f92672">=</span> MakeArrayView(Materials);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Proxy <span style="color:#f92672">=</span> <span style="color:#f92672">::</span><span style="color:#66d9ef">new</span> FStaticMeshSceneProxy(Data<span style="color:#f92672">-&gt;</span>ProxyDesc, false);
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneInfoData.SceneProxy <span style="color:#f92672">=</span> Proxy;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.PrimitiveUObject <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.PrimitiveSceneData <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>SceneInfoData;
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.LocalBounds <span style="color:#f92672">=</span> Mesh<span style="color:#f92672">-&gt;</span>GetBounds();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.RenderMatrix <span style="color:#f92672">=</span> GetActorTransform().ToMatrixWithScale();
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.AttachmentRootPosition <span style="color:#f92672">=</span> GetActorTransform().GetLocation();
+</span></span><span style="display:flex;"><span>	Data<span style="color:#f92672">-&gt;</span>SceneDesc.Bounds <span style="color:#f92672">=</span> Mesh<span style="color:#f92672">-&gt;</span>GetBounds().TransformBy(GetActorTransform());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>	GetWorld()<span style="color:#f92672">-&gt;</span>Scene<span style="color:#f92672">-&gt;</span>AddPrimitive(<span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>SceneDesc);
+</span></span><span style="display:flex;"><span>	GetWorld()<span style="color:#f92672">-&gt;</span>Scene<span style="color:#f92672">-&gt;</span>UpdatePrimitiveTransform(<span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>SceneDesc);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Let&rsquo;s break down what&rsquo;s happening here:</p>
+<ol>
+<li><strong>Material Setup</strong>: We create an inline array to avoid heap allocation for the common single-material case</li>
+<li><strong>Custom Primitive Data</strong>: We can pass arbitrary data to shaders—in this case, RGB values</li>
+<li><strong>Proxy Descriptor</strong>: We&rsquo;re filling in all the metadata the proxy needs to know how to render</li>
+<li><strong>Scene Descriptor</strong>: This is what the scene uses to track and update our primitive</li>
+<li><strong>Adding to Scene</strong>: <code>AddPrimitive()</code> registers it with the scene, and <code>UpdatePrimitiveTransform()</code> ensures the transform is properly initialized</li>
+</ol>
+<h3 id="proper-cleanup">Proper Cleanup</h3>
+<p>This is critical—we used render thread resources, so we need to clean them up on the render thread to avoid use-after-free bugs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AYourActor<span style="color:#f92672">::</span>EndPlay(<span style="color:#66d9ef">const</span> EEndPlayReason<span style="color:#f92672">::</span>Type EndPlayReason)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>EndPlay(EndPlayReason);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	GetWorld()<span style="color:#f92672">-&gt;</span>Scene<span style="color:#f92672">-&gt;</span>RemovePrimitive(<span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>SceneDesc);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	TUniquePtr<span style="color:#f92672">&lt;</span>FTestProxyData<span style="color:#f92672">&gt;</span> DataToDelete <span style="color:#f92672">=</span> MoveTemp(Data);	
+</span></span><span style="display:flex;"><span>	ENQUEUE_RENDER_COMMAND(CleanupSceneProxy)([DataToDelete <span style="color:#f92672">=</span> MoveTemp(DataToDelete)](FRHICommandListImmediate<span style="color:#f92672">&amp;</span>) <span style="color:#66d9ef">mutable</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		DataToDelete.Reset();
+</span></span><span style="display:flex;"><span>	});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Why this pattern? The scene proxy might still be referenced by in-flight render commands. By deferring deletion to the render thread, we guarantee all references are done before we delete.</p>
+<h2 id="parallelizing-transform-updates">Parallelizing Transform Updates</h2>
+<p>Now for the payoff, let&rsquo;s parallelize those transform updates:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AYourActor<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaSeconds)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaSeconds);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// We gotta tell the scene we&#39;re about to update multiple primitives
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// This allows it to batch internal processing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	GetWorld()<span style="color:#f92672">-&gt;</span>Scene<span style="color:#f92672">-&gt;</span>StartUpdatePrimitiveTransform(Datas.Num());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ParallelFor(Datas.Num(), [<span style="color:#f92672">&amp;</span>](int32 Index)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> Data <span style="color:#f92672">=</span> Datas[Index];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Update the transform matrix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		Data<span style="color:#f92672">-&gt;</span>SceneDesc.RenderMatrix <span style="color:#f92672">=</span> CalculateTransformForIndex(Index).ToMatrixWithScale();
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Update the bounds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		Data<span style="color:#f92672">-&gt;</span>SceneDesc.Bounds <span style="color:#f92672">=</span> Mesh<span style="color:#f92672">-&gt;</span>GetBounds().TransformBy(Data<span style="color:#f92672">-&gt;</span>SceneDesc.RenderMatrix);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Push the update to the scene
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#75715e">// This is thread-safe because each thread updates a different primitive
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		GetWorld()<span style="color:#f92672">-&gt;</span>Scene<span style="color:#f92672">-&gt;</span>UpdatePrimitiveTransform(<span style="color:#f92672">&amp;</span>Data<span style="color:#f92672">-&gt;</span>SceneDesc);
+</span></span><span style="display:flex;"><span>	});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This completely bypasses <code>UWorld::SendAllEndOfFrameUpdates()</code>. Each thread updates its own subset of primitives, and the scene handles the updates in a thread-safe manner. The <code>StartUpdatePrimitiveTransform()</code> call pre-allocates any necessary internal structures to avoid race conditions.</p>
+<h3 id="important-considerations">Important Considerations</h3>
+<p>This example is simplified for clarity. In production code, you&rsquo;d want to consider:</p>
+<ol>
+<li>
+<p><strong>Memory Layout</strong>: <code>TArray&lt;TUniquePtr&lt;&gt;&gt;</code> isn&rsquo;t cache-friendly. Consider using a single allocation with offsets, or <code>TChunkedArray</code> for better iteration performance.</p>
+</li>
+<li>
+<p><strong>Batch Size</strong>: <code>ParallelFor</code> has scheduling overhead. Don&rsquo;t parallelize unless you have enough work (typically 100+ items minimum).</p>
+</li>
+<li>
+<p><strong>Bounds Updates</strong>: We update bounds every frame here, but if your mesh doesn&rsquo;t deform, you can cache transformed bounds and only recalculate when the transform actually changes.</p>
+</li>
+<li>
+<p><strong>Dirty Tracking</strong>: Implement your own dirty flags to avoid updating unchanged primitives.</p>
+</li>
+<li>
+<p><strong>LOD Selection</strong>: The scene proxy handles LOD selection, but you might want to manually control this for very distant objects.</p>
+</li>
+</ol>
+<h2 id="advanced-usage-iprimitivecomponent-interface">Advanced Usage: IPrimitiveComponent Interface</h2>
+<p>There&rsquo;s another piece to this puzzle: the <code>IPrimitiveComponent</code> interface. By implementing this interface, you can:</p>
+<ul>
+<li><strong>Precache PSOs</strong>: Tell the engine which Pipeline State Objects you&rsquo;ll need, reducing hitching</li>
+<li><strong>Handle visibility queries</strong>: Control culling behavior without a full component</li>
+<li><strong>Implement custom debug drawing</strong>: Integrate with the engine&rsquo;s debug rendering systems</li>
+<li><strong>Respond to scene changes</strong>: Get callbacks when the lighting rebuilds or world is reloaded</li>
+</ul>
+<p>Here&rsquo;s a minimal implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FCustomPrimitiveComponent</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> IPrimitiveComponent
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the primitive is added to the scene
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnRegister() <span style="color:#66d9ef">override</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the primitive is removed from the scene
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnUnregister</span>() <span style="color:#66d9ef">override</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">virtual</span> FPrimitiveSceneProxy<span style="color:#f92672">*</span> <span style="color:#a6e22e">GetSceneProxy</span>() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> SceneProxy;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Can be used to precache PSOs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CollectPSOPrecacheData</span>(<span style="color:#66d9ef">const</span> FPSOPrecacheParams<span style="color:#f92672">&amp;</span> Params, FComponentPSOPrecacheParamsList<span style="color:#f92672">&amp;</span> OutParams) <span style="color:#66d9ef">override</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Could add your material/vertex factory combinations here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	FStaticMeshSceneProxy<span style="color:#f92672">*</span> SceneProxy <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This gives you the benefits of the component system (PSO precaching, editor integration, etc.) without the overhead of the full <code>UPrimitiveComponent</code> machinery.</p>
+<p>Manual scene proxy management is a powerful technique for squeezing maximum performance out of Unreal&rsquo;s rendering system. By bypassing the component abstraction layer and working directly with the scene, you gain fine-grained control over when and how updates happen.</p>
+<p>The biggest benefit is the ability to parallelize transform updates and eliminate the end-of-frame synchronization bottleneck. For systems with large numbers of simple, moving objects, this can translate to dramatic frame rate improvements.</p>
+<p>You should note, you&rsquo;re operating outside the safety rails of the component system, so careful attention to threading, memory management, and resource lifetimes is essential.</p>
+<p>If you have questions, optimizations, or interesting use cases you&rsquo;ve discovered, please drop a comment below or reach out on Discord. I&rsquo;d love to hear how you&rsquo;re using this technique in your projects!</p>
+<p>Thanks for reading!</p>
+<hr>
+<p><em>Code examples tested with Unreal Engine 5.6. Some APIs may change in future versions.</em></p>
+</section>
+
+  <section id="comments">
+    <script src="https://utteranc.es/client.js"
+        repo="MrDrElliot/DrElliotBlog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
+</section>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">Scroll to Top</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2025 Dr. Elliot</div>
+    <div>Made with ❤️ and powered by <a href="https://github.com/math-queiroz/rusty-typewriter" target="_blank">Rusty Typewriter</a> theme for <a href="https://gohugo.io/" target="_blank">Hugo</a></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky"><div class="side-details">
+    <span>1649 words</span>
+    <span>12 - 15 minutes read</span></div><h3>Table Of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#understanding-the-scene-architecture">Understanding the Scene Architecture</a>
+      <ul>
+        <li><a href="#fstaticmeshsceneproxydesc">FStaticMeshSceneProxyDesc</a></li>
+        <li><a href="#fstaticmeshsceneproxy">FStaticMeshSceneProxy</a></li>
+        <li><a href="#fprimitivescenedesc">FPrimitiveSceneDesc</a></li>
+        <li><a href="#fprimitivesceneinfodata">FPrimitiveSceneInfoData</a></li>
+        <li><a href="#fcustomprimitivedata">FCustomPrimitiveData</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-performance-problem">The Performance Problem</a>
+      <ul>
+        <li><a href="#setting-up-the-data-structure">Setting Up the Data Structure</a></li>
+        <li><a href="#adding-the-proxy-to-the-scene">Adding the Proxy to the Scene</a></li>
+        <li><a href="#proper-cleanup">Proper Cleanup</a></li>
+      </ul>
+    </li>
+    <li><a href="#parallelizing-transform-updates">Parallelizing Transform Updates</a>
+      <ul>
+        <li><a href="#important-considerations">Important Considerations</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-usage-iprimitivecomponent-interface">Advanced Usage: IPrimitiveComponent Interface</a></li>
+  </ul>
+</nav><h3>Related</h3>
+    <ul><li><a href="/posts/general/polymorphism/">Metaprogramming Polymorphism</a></li><li><a href="/posts/general/vtable/">Fun with V-Tables</a></li><li><a href="/posts/memory/buffers/">Working With Buffers</a></li><li><a href="/posts/memory/pointerarithmetic/">Pointer Arithmetic in C&#43;&#43;: A Comprehensive Guide</a></li><li><a href="/posts/memory/movesemantics/">Move Semantics</a></li></ul></aside></div>
+  </div>
+</body>
+</html>
