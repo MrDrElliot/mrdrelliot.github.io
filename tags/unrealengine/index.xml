@@ -13,7 +13,7 @@
       <link>https://www.dr-elliot.com/posts/general/unrealsceneproxies/</link>
       <pubDate>Sun, 09 Nov 2025 12:34:23 -0500</pubDate>
       <guid>https://www.dr-elliot.com/posts/general/unrealsceneproxies/</guid>
-      <description>One of the largest performance overheads in Unreal is the need for actors and primitive components to draw something in a world. Today I want to show you a way to bypass these abstractions entirely and manually draw primitives to the world with minimal overhead.&#xA;Before we dive into the implementation, let&amp;rsquo;s talk about how the engine actually manages what&amp;rsquo;s being rendered in a UWorld. Spoiler: the UWorld isn&amp;rsquo;t really responsible for that at all.</description>
+      <description>One of the largest performance overheads in Unreal is the need for actors and primitive components to draw something in a world. Today I want to show you a way to bypass these abstractions entirely and manually draw primitives to the world with minimal overhead.&#xA;Before we dive into the implementation, let&amp;rsquo;s talk about how the engine actually manages what&amp;rsquo;s being rendered in a UWorld.&#xA;Understanding the Scene Architecture Inside the UWorld class, there&amp;rsquo;s a property called Scene.</description>
     </item>
     <item>
       <title>Use less RPCs</title>
